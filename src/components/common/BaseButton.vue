@@ -1,4 +1,5 @@
 <script setup>
+import BaseIcon from '@/components/common/BaseIcon.vue';
 import { defineProps } from 'vue';
 
 const props = defineProps({
@@ -24,23 +25,19 @@ const props = defineProps({
     },
 });
 
-console.log(props.iconBefore);
 </script>
 
 <template>
     <button class="base-button" type="button" :data-shape=props.shape :data-size=props.size :data-bg=props.bg>
-        <span v-if="props.iconBefore" :data-icon=props.iconBefore></span>
-        <span>
+        <BaseIcon v-if="props.iconBefore" :name=props.iconBefore :size=props.size></BaseIcon>
+        <span class="base-button-txt" >
             <slot></slot> 
         </span>
-        <span v-if="props.iconAfter" :data-icon=props.iconAfter></span>
+        <BaseIcon v-if="props.iconAfter" :name=props.iconAfter :size=props.size></BaseIcon>
     </button>
 </template>
 
 <style scoped lang="scss">
-$gap: var(--gap);
-$gap_half: var(--gap) / 2;
-
 .base-button{
     border:.1rem solid #ccc;
     display: flex;
@@ -61,37 +58,18 @@ $gap_half: var(--gap) / 2;
         padding: .4rem 1.2rem;
         font-size: 1.2rem;
         &[data-shape="round"] {border-radius: 2rem;}
-        [data-icon]{
-            width:1.2rem;
-            height:1.2rem;
-            background-size:1.2rem;
-        }
     }
     &[data-size="medium"]{ 
         padding: .4rem 1.2rem;
         font-size: 1.4rem;
         &[data-shape="round"] {border-radius: 3rem;}
-        [data-icon]{
-            width:1.4rem;
-            height:1.4rem;
-            background-size:1.4rem;
-        }
     }
     &[data-size="large"]{ 
         padding: .6rem 1.8rem;
         font-size: 1.6rem;
         &[data-shape="round"] {border-radius: 4rem;}
-        [data-icon]{
-            width:1.6rem;
-            height:1.6rem;
-            background-size:1.6rem;
-        }
     }
 }
 
-[data-icon] {
-    position: relative;
-    display: block;
-    border:.1rem dashed #ccc;
-}
+
 </style>

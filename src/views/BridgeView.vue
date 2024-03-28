@@ -1,5 +1,6 @@
 <script setup>
-import BaseButton from '@/components/common/BaseButton.vue'
+import BaseButton from '@/components/common/BaseButton.vue';
+import BaseIcon from '@/components/common/BaseIcon.vue';
 </script>
 
 <template>
@@ -15,6 +16,7 @@ import BaseButton from '@/components/common/BaseButton.vue'
         고객님의 데이터를<br>
         안전하게 조회하기 위해<br>
         본인인증이 필요해요
+        <BaseIcon name="aaa" splite="mmm" size="small" />
       </p>
     </div>
 
