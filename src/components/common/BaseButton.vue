@@ -70,6 +70,4 @@ const props = defineProps({
         &[data-shape="round"] {border-radius: 4rem;}
     }
 }
-
-
 </style>

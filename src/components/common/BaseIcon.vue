@@ -47,7 +47,5 @@ const _splite = ref(props.splite);
         }
     }
 
-    [data-icon="aaa"] {
-        background: url() no-repeat 0 0 / 10rem;
-    }
+   
 </style>
