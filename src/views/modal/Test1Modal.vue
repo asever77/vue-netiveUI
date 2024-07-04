@@ -6,7 +6,6 @@ import Test2Modal from '@/views/modal/Test2Modal.vue';
 const props = defineProps({
   button: Object
 });
-console.log('button data', props.button)
 
 const data_modal = {
   modal: {
