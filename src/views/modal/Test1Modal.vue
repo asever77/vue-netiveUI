@@ -11,7 +11,11 @@ const data_modal = {
   modal: {
     id: 'test1',
     type: 'center',
-    class: ''
+    class: '',
+    aria: {
+      labelledby: 'test1_label',
+      describedby: 'test1_desc'
+    }
   },
   button: {
     name: props.button.name || false,
@@ -23,11 +27,12 @@ const data_modal = {
 <template>
   <ModalItem :data="data_modal">
     <template #head>
-      <h2 class="layer-item--tit">테스트1</h2>
+      <h2 class="layer-item--tit" :id="data_modal.modal.aria.labelledby" tabindex="0">테스트1</h2>
     </template>
 
     <template #body>
-      <div>aaaa</div>
+      <p :id="data_modal.modal.aria.describedby">그래서 그래요 그러니깐 이렇게 해서 이래요</p>
+      <div class="atest"><a href="#">aaaa </a><input type="text" /></div>
       <Test2Modal :button="{
         name: '적용하기',
         class: 'base'
@@ -44,4 +49,12 @@ const data_modal = {
     </template>
   </ModalItem>
 </template>
-<style scoped></style>
+<style scoped>
+.atest {
+  border: 2px solid black
+}
+
+.atest:focus-within {
+  border: 2px solid red
+}
+</style>

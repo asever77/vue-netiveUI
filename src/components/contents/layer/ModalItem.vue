@@ -15,15 +15,18 @@ const dataBtn = ref(props.data.button);
 isZindex.value = store.state.Layer.zindex;
 
 const descID = dataModal.value.id + '_desc';
-
+const labelID = dataModal.value.id + '_label';
+const thisFocus = ref(null);
 
 //실행
 const open = () => {
   //show
+  thisFocus.value = document.activeElement;
   isHidden.value = false;
 
   const layerItem = document.querySelector(`.layer-item[data-id="${dataModal.value.id}"]`);
   const closeBtn = layerItem.querySelector('.layer-item--close');
+  const closeBtHide = layerItem.querySelector('.layer-item--close-hide');
   // const closeBtnHide = layerItem.querySelector('.layer-item--close-hide');
 
   //zindex
@@ -31,7 +34,24 @@ const open = () => {
   isZindex.value = store.state.Layer.zindex;
   layerItem.style.zIndex = isZindex.value;
 
+
+  //실행
+  const a11y_keyStart = (e) => {
+    if (e.shiftKey && e.key === 'Tab') {
+      e.preventDefault();
+      closeBtHide.focus();
+    }
+  }
+  const a11y_keyEnd = (e) => {
+    if (!e.shiftKey && e.key === 'Tab') {
+      e.preventDefault();
+      closeBtn.focus();
+    }
+  }
+
   //focus
+  closeBtn.addEventListener('keydown', a11y_keyStart);
+  closeBtHide.addEventListener('keydown', a11y_keyEnd);
   layerItem.addEventListener('animationend', () => {
     closeBtn.focus();
   });
@@ -42,6 +62,8 @@ const close = () => {
   //zindex
   store.commit("setZindex", store.getters.zindexDown);
   isZindex.value = store.state.Layer.zindex;
+  console.log(thisFocus.value)
+  thisFocus.value && thisFocus.value.focus();
 };
 
 
@@ -56,8 +78,8 @@ const close = () => {
       data-id: '{unique ID}'
       aria-describedby: '{unique ID}_desc'
      -->
-    <section class="layer-item" role="dialog" :data-type="dataModal.type" :data-id="dataModal.id"
-      :aria-describedby="descID" :aria-hidden="isHidden">
+    <section class="layer-item" role="dialog" :data-type="dataModal.type" :data-id="dataModal.id" {}
+      :aria-labelledby="labelID" :aria-describedby="descID" :aria-hidden="isHidden">
       <div class="layer-item--wrap" role="document" tabindex="-1">
         <button type="button" class="layer-item--close" aria-label="레이어콘텐츠 닫기" @click="close">닫기</button>
 
