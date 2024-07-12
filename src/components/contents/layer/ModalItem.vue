@@ -9,14 +9,19 @@ const props = defineProps({
 
 const isHidden = ref(true);
 const isZindex = ref(null);
+const isViews = ref(null);
+
 const dataModal = ref(props.data.modal);
 const dataBtn = ref(props.data.button);
 
 isZindex.value = store.state.Layer.zindex;
+isViews.value = store.state.Layer.view;
 
 const descID = dataModal.value.id + '_desc';
 const labelID = dataModal.value.id + '_label';
 const thisFocus = ref(null);
+
+
 
 //실행
 const open = () => {
@@ -25,6 +30,7 @@ const open = () => {
   isHidden.value = false;
 
   const layerItem = document.querySelector(`.layer-item[data-id="${dataModal.value.id}"]`);
+  const layerWrap = layerItem.querySelector('.layer-item--wrap');
   const closeBtn = layerItem.querySelector('.layer-item--close');
   const closeBtHide = layerItem.querySelector('.layer-item--close-hide');
   // const closeBtnHide = layerItem.querySelector('.layer-item--close-hide');
@@ -48,13 +54,21 @@ const open = () => {
       closeBtn.focus();
     }
   }
-
+  console.log('open', dataModal.value.id)
   //focus
   closeBtn.addEventListener('keydown', a11y_keyStart);
   closeBtHide.addEventListener('keydown', a11y_keyEnd);
-  layerItem.addEventListener('animationend', () => {
+  const actAniend = e => {
+    console.log(e);
     closeBtn.focus();
-  });
+    const viewLayers = document.querySelectorAll('.layer-item[aria-hidden="false"]');
+    console.log(viewLayers.length);
+    layerWrap.removeEventListener('animationend', actAniend);
+  }
+  // layerWrap.removeEventListener('animationend', actAniend);
+  layerWrap.addEventListener('animationend', actAniend);
+
+
 }
 const close = () => {
   isHidden.value = true;
@@ -64,6 +78,9 @@ const close = () => {
   isZindex.value = store.state.Layer.zindex;
   console.log(thisFocus.value)
   thisFocus.value && thisFocus.value.focus();
+
+  const viewLayers = document.querySelectorAll('.layer-item[aria-hidden="false"]');
+  console.log(viewLayers.length)
 };
 
 
@@ -78,7 +95,7 @@ const close = () => {
       data-id: '{unique ID}'
       aria-describedby: '{unique ID}_desc'
      -->
-    <section class="layer-item" role="dialog" :data-type="dataModal.type" :data-id="dataModal.id" {}
+    <section class="layer-item" role="dialog" :data-type="dataModal.type" :data-id="dataModal.id"
       :aria-labelledby="labelID" :aria-describedby="descID" :aria-hidden="isHidden">
       <div class="layer-item--wrap" role="document" tabindex="-1">
         <button type="button" class="layer-item--close" aria-label="레이어콘텐츠 닫기" @click="close">닫기</button>
