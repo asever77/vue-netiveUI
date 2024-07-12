@@ -25,7 +25,6 @@ const thisFocus = ref(null);
 
 //실행
 const open = () => {
-  //show
   thisFocus.value = document.activeElement;
   isHidden.value = false;
 
@@ -35,11 +34,15 @@ const open = () => {
   const closeBtHide = layerItem.querySelector('.layer-item--close-hide');
   // const closeBtnHide = layerItem.querySelector('.layer-item--close-hide');
 
+  layerItem.dataset.active = 'true';
+  console.log(isViews.value);
+  // store.commit("setZindex", store.getters.zindexUp);
+
   //zindex
   store.commit("setZindex", store.getters.zindexUp);
   isZindex.value = store.state.Layer.zindex;
   layerItem.style.zIndex = isZindex.value;
-
+  console.log('isZindex', isZindex.value);
 
   //실행
   const a11y_keyStart = (e) => {
@@ -54,18 +57,16 @@ const open = () => {
       closeBtn.focus();
     }
   }
-  console.log('open', dataModal.value.id)
+
   //focus
   closeBtn.addEventListener('keydown', a11y_keyStart);
   closeBtHide.addEventListener('keydown', a11y_keyEnd);
-  const actAniend = e => {
-    console.log(e);
+  const actAniend = () => {
     closeBtn.focus();
     const viewLayers = document.querySelectorAll('.layer-item[aria-hidden="false"]');
     console.log(viewLayers.length);
     layerWrap.removeEventListener('animationend', actAniend);
   }
-  // layerWrap.removeEventListener('animationend', actAniend);
   layerWrap.addEventListener('animationend', actAniend);
 
 
@@ -186,11 +187,12 @@ button.base {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.6);
   opacity: 0;
   z-index: 0;
   transition-delay: 1s;
-  transition: opacity 2s ease;
+  backdrop-filter: blur(.4rem);
+  transition: all 2s ease;
 }
 
 .layer-item--wrap {
@@ -199,6 +201,8 @@ button.base {
   z-index: 1;
   padding: 2.4rem;
   opacity: 0;
+  border-radius: .8rem;
+  box-shadow: 0 0 .8rem rgba(0, 0, 0, 40%);
 }
 
 .layer-item--close-hide:focus {

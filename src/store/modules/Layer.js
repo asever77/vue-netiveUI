@@ -6,14 +6,17 @@ export const Layer = {
     mutations: {
         setZindex(state, value) {
             state.zindex = value;
+        },
+        setView(state, value) {
+            state.view = value;
         }
     },
     actions: {
-        globalAction: {
-            handler({ commit }) {
-                commit("setZindex", 199);
-            }
-        }
+        // globalAction: {
+        //     handler({ commit }) {
+        //         commit("setZindex", 199);
+        //     }
+        // }
     },
     getters: {
         zindexUp(state) {
