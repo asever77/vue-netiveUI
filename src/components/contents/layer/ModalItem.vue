@@ -20,7 +20,7 @@ isViews.value = store.state.Layer.view;
 const descID = dataModal.value.id + '_desc';
 const labelID = dataModal.value.id + '_label';
 const thisFocus = ref(null);
-
+const appContent = document.querySelector('#app');
 
 
 //실행
@@ -34,15 +34,14 @@ const open = () => {
   const closeBtHide = layerItem.querySelector('.layer-item--close-hide');
   // const closeBtnHide = layerItem.querySelector('.layer-item--close-hide');
 
+  appContent.setAttribute('aria-hidden', 'true');
   layerItem.dataset.active = 'true';
-  console.log(isViews.value);
   // store.commit("setZindex", store.getters.zindexUp);
 
   //zindex
   store.commit("setZindex", store.getters.zindexUp);
   isZindex.value = store.state.Layer.zindex;
   layerItem.style.zIndex = isZindex.value;
-  console.log('isZindex', isZindex.value);
 
   //실행
   const a11y_keyStart = (e) => {
@@ -63,8 +62,8 @@ const open = () => {
   closeBtHide.addEventListener('keydown', a11y_keyEnd);
   const actAniend = () => {
     closeBtn.focus();
-    const viewLayers = document.querySelectorAll('.layer-item[aria-hidden="false"]');
-    console.log(viewLayers.length);
+    // const viewLayers = document.querySelectorAll('.layer-item[aria-hidden="false"]');
+    // console.log(viewLayers.length);
     layerWrap.removeEventListener('animationend', actAniend);
   }
   layerWrap.addEventListener('animationend', actAniend);
@@ -75,16 +74,16 @@ const close = () => {
   isHidden.value = true;
 
   //zindex
+
   store.commit("setZindex", store.getters.zindexDown);
   isZindex.value = store.state.Layer.zindex;
-  console.log(thisFocus.value)
   thisFocus.value && thisFocus.value.focus();
 
   const viewLayers = document.querySelectorAll('.layer-item[aria-hidden="false"]');
-  console.log(viewLayers.length)
+  if (viewLayers.length < 2) {
+    appContent.setAttribute('aria-hidden', 'false');
+  }
 };
-
-
 </script>
 
 <template>
@@ -226,7 +225,7 @@ button.base {
     display: flex;
   }
 
-  99% {
+  97% {
     opacity: 0;
     display: flex;
   }
