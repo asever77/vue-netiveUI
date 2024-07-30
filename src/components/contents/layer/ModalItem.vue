@@ -21,12 +21,17 @@ const descID = dataModal.value.id + '_desc';
 const labelID = dataModal.value.id + '_label';
 const thisFocus = ref(null);
 const appContent = document.querySelector('#app');
-
+const _body = document.querySelector('body');
 
 //실행
 const open = () => {
   thisFocus.value = document.activeElement;
   isHidden.value = false;
+
+
+  if (dataModal.value.type === 'full-page') {
+    _body.dataset.pageSwiper = "on";
+  }
 
   const layerItem = document.querySelector(`.layer-item[data-id="${dataModal.value.id}"]`);
   const layerWrap = layerItem.querySelector('.layer-item--wrap');
@@ -72,6 +77,10 @@ const open = () => {
 }
 const close = () => {
   isHidden.value = true;
+
+  if (dataModal.value.type === 'full-page') {
+    _body.dataset.pageSwiper = "off";
+  }
 
   //zindex
 
@@ -125,158 +134,5 @@ button.base {
   border: 1px solid var(--c_sub);
   color: var(--c_sub);
   cursor: pointer;
-}
-
-.layer-item {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 100;
-
-  &[aria-hidden="true"] {
-    animation-name: modalColse;
-    animation-duration: 1s;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
-
-    .layer-item--dim {
-      animation-name: hide_dimAni;
-      animation-duration: .4s;
-      animation-iteration-count: 1;
-      animation-fill-mode: forwards;
-    }
-
-    .layer-item--wrap {
-      animation-name: hide_wrapAni;
-      animation-duration: .2s;
-      animation-iteration-count: 1;
-      animation-fill-mode: forwards;
-    }
-  }
-
-  &[aria-hidden="false"] {
-    display: flex;
-
-    .layer-item--dim {
-      animation-name: show_dimAni;
-      animation-delay: .1s;
-      animation-duration: .3s;
-      animation-iteration-count: 1;
-      animation-fill-mode: forwards;
-    }
-
-    .layer-item--wrap {
-      animation-name: show_wrapAni;
-      animation-delay: .2s;
-      animation-duration: .4s;
-      animation-iteration-count: 1;
-      animation-fill-mode: forwards;
-    }
-  }
-}
-
-.layer-item--dim {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  opacity: 0;
-  z-index: 0;
-  transition-delay: 1s;
-  backdrop-filter: blur(.4rem);
-  transition: all 2s ease;
-}
-
-.layer-item--wrap {
-  background: #fff;
-  position: relative;
-  z-index: 1;
-  padding: 2.4rem;
-  opacity: 0;
-  border-radius: .8rem;
-  box-shadow: 0 0 .8rem rgba(0, 0, 0, 40%);
-}
-
-.layer-item--close-hide:focus {
-  opacity: 1;
-  bottom: 1rem;
-}
-
-.layer-item--close-hide {
-  position: fixed;
-  left: 50%;
-  transform: translate(-50%, 0);
-  bottom: -10rem;
-  opacity: 0;
-
-
-}
-
-@keyframes modalColse {
-  0% {
-    opacity: 1;
-    display: flex;
-  }
-
-  97% {
-    opacity: 0;
-    display: flex;
-  }
-
-  100% {
-    opacity: 0;
-    display: none;
-  }
-}
-
-@keyframes show_dimAni {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes hide_dimAni {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes show_wrapAni {
-  0% {
-    opacity: 0;
-    scale: 0.8;
-  }
-
-  100% {
-    opacity: 1;
-    scale: 1;
-  }
-}
-
-@keyframes hide_wrapAni {
-  0% {
-    opacity: 1;
-    scale: 1;
-  }
-
-  100% {
-    opacity: 0;
-    scale: 0.5;
-  }
 }
 </style>
