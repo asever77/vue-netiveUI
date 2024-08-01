@@ -6,7 +6,7 @@
 
 import { defineProps } from 'vue';
 import ModalItem from '@/components/contents/layer/ModalItem';
-import TermsModal from '@/views/modal/TermsModal.vue';
+import TermsModal from '@/views/modal/TermsModal.vue';//약관
 
 const props = defineProps({
   button: Object
@@ -27,6 +27,8 @@ const data_modal = {
     class: props.button.class
   }
 }
+
+
 </script>
 
 <template>

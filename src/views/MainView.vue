@@ -4,7 +4,15 @@ import StartModal from '@/views/modal/StartModal.vue';
 
 const store = useStore();
 store.state.page = 1;
-console.log(store.state);
+console.log('UI', this);
+
+// setTimeout(() => {
+//   UI.alert.init({ 
+//     title:'adfadf', 
+//     content:'ddd'
+//   });
+// }, 2000)
+
 </script>
 
 <template>

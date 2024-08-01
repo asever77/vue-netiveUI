@@ -9,8 +9,6 @@ import FooterBase from '@/components/common/FooterBase.vue';
     <router-view />
     <FooterBase />
   </div>
-  <div class="base-layer"></div>
-
 </template>
 
 <style scoped lang="scss">
@@ -21,5 +19,6 @@ import FooterBase from '@/components/common/FooterBase.vue';
   max-width: 40rem;
   margin: 0 auto;
   padding: 2.4rem;
+  min-height: 100dvh;
 }
 </style>

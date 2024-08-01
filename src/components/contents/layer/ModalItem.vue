@@ -20,15 +20,19 @@ isViews.value = store.state.Layer.view;
 const descID = dataModal.value.id + '_desc';
 const labelID = dataModal.value.id + '_label';
 const thisFocus = ref(null);
-const appContent = document.querySelector('#app');
 const _body = document.querySelector('body');
+
 
 //실행
 const open = () => {
+  const baseWrap = document.querySelector('.base-wrap');
+  //이전 포커스 저장
   thisFocus.value = document.activeElement;
+
+  //aria-hidden 값 > css animation
   isHidden.value = false;
 
-
+  //페이지 좌우 이동 효과
   if (dataModal.value.type === 'full-page') {
     _body.dataset.pageSwiper = "on";
   }
@@ -36,61 +40,68 @@ const open = () => {
   const layerItem = document.querySelector(`.layer-item[data-id="${dataModal.value.id}"]`);
   const layerWrap = layerItem.querySelector('.layer-item--wrap');
   const closeBtn = layerItem.querySelector('.layer-item--close');
-  const closeBtHide = layerItem.querySelector('.layer-item--close-hide');
-  // const closeBtnHide = layerItem.querySelector('.layer-item--close-hide');
+  // const closeBtHide = layerItem.querySelector('.layer-item--close-hide');
 
-  appContent.setAttribute('aria-hidden', 'true');
+  //외부영역 접근막기
+  console.log('baseWrap', baseWrap);
+  baseWrap.setAttribute('inert', 'true');
+  baseWrap.setAttribute('aria-hidden', 'true');
+
   layerItem.dataset.active = 'true';
   // store.commit("setZindex", store.getters.zindexUp);
 
-  //zindex
+  //z-index 값 설정
   store.commit("setZindex", store.getters.zindexUp);
   isZindex.value = store.state.Layer.zindex;
   layerItem.style.zIndex = isZindex.value;
 
-  //실행
-  const a11y_keyStart = (e) => {
-    if (e.shiftKey && e.key === 'Tab') {
-      e.preventDefault();
-      closeBtHide.focus();
-    }
-  }
-  const a11y_keyEnd = (e) => {
-    if (!e.shiftKey && e.key === 'Tab') {
-      e.preventDefault();
-      closeBtn.focus();
-    }
-  }
+  //웹접근성 탭 포커스 가두기
+  // const a11y_keyStart = (e) => {
+  //   if (e.shiftKey && e.key === 'Tab') {
+  //     e.preventDefault();
+  //     closeBtHide.focus();
+  //   }
+  // }
+  // const a11y_keyEnd = (e) => {
+  //   if (!e.shiftKey && e.key === 'Tab') {
+  //     e.preventDefault();
+  //     closeBtn.focus();
+  //   }
+  // }
+  // closeBtn.addEventListener('keydown', a11y_keyStart);
+  // closeBtHide.addEventListener('keydown', a11y_keyEnd);
 
-  //focus
-  closeBtn.addEventListener('keydown', a11y_keyStart);
-  closeBtHide.addEventListener('keydown', a11y_keyEnd);
-  const actAniend = () => {
+  //css animation 끝나는 시점
+  const actMotionEnd = () => {
     closeBtn.focus();
     // const viewLayers = document.querySelectorAll('.layer-item[aria-hidden="false"]');
     // console.log(viewLayers.length);
-    layerWrap.removeEventListener('animationend', actAniend);
+    layerWrap.removeEventListener('animationend', actMotionEnd);
   }
-  layerWrap.addEventListener('animationend', actAniend);
+  layerWrap.addEventListener('animationend', actMotionEnd);
 
 
 }
 const close = () => {
+  const baseWrap = document.querySelector('.base-wrap');
+  //aria-hidden 값 > css animation
   isHidden.value = true;
 
+  //페이지 좌우 이동 효과
   if (dataModal.value.type === 'full-page') {
     _body.dataset.pageSwiper = "off";
   }
 
   //zindex
-
   store.commit("setZindex", store.getters.zindexDown);
   isZindex.value = store.state.Layer.zindex;
   thisFocus.value && thisFocus.value.focus();
 
+  //현재 활성화 되어 있는 레이어 체크하여 하나일때 본문접근 가능설정
   const viewLayers = document.querySelectorAll('.layer-item[aria-hidden="false"]');
   if (viewLayers.length < 2) {
-    appContent.setAttribute('aria-hidden', 'false');
+    baseWrap.removeAttribute('inert');
+    baseWrap.setAttribute('aria-hidden', 'false');
   }
 };
 </script>
@@ -98,7 +109,7 @@ const close = () => {
 <template>
   <button type="button" :class="dataBtn.class" @click="open" v-if="dataBtn.name">{{ dataBtn.name }}</button>
 
-  <Teleport to="body">
+  <Teleport to=".base-layer">
     <!-- 
       data-type: 'center' | 'bottom' | 'top' | 'full'
       data-id: '{unique ID}'
@@ -126,13 +137,4 @@ const close = () => {
   </Teleport>
 </template>
 
-<style scoped lang="scss">
-button.base {
-  background: #fff;
-  padding: .8rem 1.2rem;
-  border-radius: .4rem;
-  border: 1px solid var(--c_sub);
-  color: var(--c_sub);
-  cursor: pointer;
-}
-</style>
+<style scoped lang="scss"></style>
