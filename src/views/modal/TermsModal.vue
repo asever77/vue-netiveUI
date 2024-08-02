@@ -1,6 +1,6 @@
 <script setup>
 import { defineProps } from 'vue';
-import ModalItem from '@/components/contents/layer/ModalItem';
+import ModalItem from '@/components/contents/ModalItem';
 
 const props = defineProps({
   button: Object

@@ -3,15 +3,14 @@
  * 성별 선택 및 만 나이 입력
  * 
  */
-
-import { defineProps } from 'vue';
-import ModalItem from '@/components/contents/layer/ModalItem';
+import { inject, defineProps } from 'vue';
+import ModalItem from '@/components/contents/ModalItem';
 import TermsModal from '@/views/modal/TermsModal.vue';//약관
 
 const props = defineProps({
   button: Object
 });
-
+const systemModal = inject('systemModal');
 const data_modal = {
   modal: {
     id: 'startModal',
@@ -27,7 +26,19 @@ const data_modal = {
     class: props.button.class
   }
 }
-
+const alertShow = () => {
+  systemModal.show({
+    id: 'alert_test1',
+    title: '나이를 다시 입력해 주세요.',
+    content: '20세부터 추천 결과 조회가 가능합니다.',
+    control: [
+      {
+        name: '확인',
+        callback: alert(1111)
+      }
+    ]
+  });
+}
 
 </script>
 
@@ -88,7 +99,7 @@ const data_modal = {
 
     <template #foot>
       <div class="btn--wrap">
-        <button type="button" class="btn--box">
+        <button type="button" class="btn--box" @click="alertShow">
           <span>간단 조회 하기</span>
         </button>
       </div>
