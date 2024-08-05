@@ -95,7 +95,7 @@ const close = e => {
   isHidden.value = true;
   layerItem.dataset.active = 'false';
   layerItem.setAttribute('aria-hidden', 'true');
-
+  layerItem.removeAttribute('style');
   //페이지 좌우 이동 효과
   if (dataModal.value.type === 'full-page') {
     _body.dataset.pageSwiper = "off";

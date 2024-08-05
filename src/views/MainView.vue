@@ -4,6 +4,7 @@ import { inject, ref, watch } from 'vue';
 import StartModal from '@/views/modal/StartModal.vue';
 import TestTab1 from '@/views/tab/TabTest1.vue';
 import TermsModal from '@/views/modal/TermsModal.vue';//약관
+import Selection from '@/components/contents/SelectionItem';
 
 const store = useStore();
 store.state.page = 1;
@@ -45,7 +46,6 @@ const alertShow = () => {
 watch([isToastTest, isAlertTest], () => {
   console.log('watch')
 });
-
 </script>
 
 <template>
@@ -62,6 +62,38 @@ watch([isToastTest, isAlertTest], () => {
             내 성별과 나이에 맞는 검진 항목을 확인해 보세요.
           </em>
         </div>
+
+        <t>밑줄</t>
+        <p>중요한 <em data-marker="yellow">내용에 밑줄</em> 쫘악</p>
+
+        <t>말줄임 1~3줄</t>
+        <p data-ellipsis="1">
+          두뇌 부위를 여러 방향에서 조사하여, 투과한 X선을 검출기로 수집하고 두뇌 여러 부위의 X선의 흡수차이를 컴퓨터가 재구성하는 촬영 기법을 말합니다. 이 기업은 혈액, 뇌척수액, 백질, 회백질, 종양
+          등을 구분하는 데에 우수한 분해능과 대조도를 가지며 뇌출혈을 비롯한 뇌질환 진단에 많이 사용되고 있습니다.
+        </p>
+        <br>
+        <p data-ellipsis="2">
+          두뇌 부위를 여러 방향에서 조사하여, 투과한 X선을 검출기로 수집하고 두뇌 여러 부위의 X선의 흡수차이를 컴퓨터가 재구성하는 촬영 기법을 말합니다. 이 기업은 혈액, 뇌척수액, 백질, 회백질, 종양
+          등을 구분하는 데에 우수한 분해능과 대조도를 가지며 뇌출혈을 비롯한 뇌질환 진단에 많이 사용되고 있습니다.
+        </p>
+        <br>
+        <p data-ellipsis="3">
+          두뇌 부위를 여러 방향에서 조사하여, 투과한 X선을 검출기로 수집하고 두뇌 여러 부위의 X선의 흡수차이를 컴퓨터가 재구성하는 촬영 기법을 말합니다. 이 기업은 혈액, 뇌척수액, 백질, 회백질, 종양
+          등을 구분하는 데에 우수한 분해능과 대조도를 가지며 뇌출혈을 비롯한 뇌질환 진단에 많이 사용되고 있습니다.
+        </p>
+      </guide>
+
+      <guide>
+        <t>Wrap</t>
+        <div class="wrap-box">
+          박스형태의 감싸는 요소
+        </div>
+        <section class="wrap-sec">
+          <guide-in></guide-in>영역구분
+        </section>
+        <section class="wrap-sec">
+          <guide-in></guide-in>영역구분
+        </section>
       </guide>
 
       <guide>
@@ -74,12 +106,20 @@ watch([isToastTest, isAlertTest], () => {
             </div>
             <ul class="form-grid--body" role="group" aria-labelledby="test_group">
               <li class="form-item">
-                <input type="radio" id="test_m" name="test">
-                <label for="test_m" class="form-item--radio">남성</label>
+                <Selection :data="{
+                  type: 'radio',
+                  name: 'test',
+                  id: 'test_m',
+                  cont: '남성'
+                }" />
               </li>
               <li class="form-item">
-                <input type="radio" id="test_w" name="test">
-                <label for="test_w" class="form-item--radio">여성</label>
+                <Selection :data="{
+                  type: 'radio',
+                  name: 'test',
+                  id: 'test_w',
+                  cont: '여성'
+                }" />
               </li>
             </ul>
           </div>
@@ -132,20 +172,27 @@ watch([isToastTest, isAlertTest], () => {
         </ul>
       </guide>
 
-      <guide>
-        <t>Wrap</t>
-        <div class="wrap-box">
-          박스형태의 감싸는 요소
-        </div>
-        <section class="wrap-sec">
-          <guide-in></guide-in>영역구분
-        </section>
-        <section class="wrap-sec">
-          <guide-in></guide-in>영역구분
-        </section>
-      </guide>
+
 
       <guide>
+        <t>Tooltip: 읽어야 하는 </t>
+        <a href="#" class="tooltip" aria-disabled="true" role="presentation">
+          <span aria-hidden="true">KBHC</span>
+          <span class="a11y-hidden">케이비헬스케어</span>
+        </a>
+
+        <t>Tooltip: 읽지 않아도 </t>
+        <a href="#" class="tooltip" aria-disabled="true" role="presentation">
+          <span aria-hidden="true">KBHC</span>
+          <span class="a11y-hidden">케이비헬스케어</span>
+        </a>
+
+        <t>Tooltip: 선택 </t>
+        <a href="#" class="tooltip" aria-disabled="true" role="presentation">
+          <span aria-hidden="true">KBHC</span>
+          <span class="a11y-hidden">케이비헬스케어</span>
+        </a>
+
         <t>Toast layer modal</t>
         <button type="button" class="btn--box" @click="toastShow">
           토스트팝업

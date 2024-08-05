@@ -52,7 +52,8 @@ onMounted(() => {
   const panels = tabPanel.querySelectorAll('.panel--item');
 
   actSelect(panels, selectedTab, 'set');
-})
+});
+
 
 </script>
 
