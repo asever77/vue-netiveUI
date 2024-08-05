@@ -185,12 +185,24 @@ legend,
     box-shadow: none !important;
 }
 guide {
+    flex-direction: column;
     display: flex;
     border:1px dashed tomato;
     width: 100%;
     padding: $x1;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: tomato;
     border-radius: .8rem;
+    background-color: #fff;
+
+    & + guide {
+        margin-top: 1.6rem;
+    }
+    t {
+        display: block;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: tomato;
+        padding-bottom: .4rem;
+        margin-bottom:.8rem;
+        border-bottom: 1px dashed tomato;
+    }
 }

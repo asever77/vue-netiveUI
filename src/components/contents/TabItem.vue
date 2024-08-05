@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref } from 'vue';
+import { defineProps, ref, onMounted } from 'vue';
 
 const props = defineProps({
   data: Object,
@@ -9,84 +9,67 @@ const tabData = ref(props.data);
 
 const tabList = tabData.value.tab;
 const selectedTab = tabData.value.selected;
+const tabID = tabData.value.id;
+
+const actSelect = (v, n, s) => {
+  for (let i = 0, len = v.length; i < len; i++) {
+    const item = v[i];
+    if (i === Number(n)) {
+      item.setAttribute('aria-expanded', true);
+      item.setAttribute('tabindex', 0);
+    } else {
+      item.setAttribute('aria-expanded', false);
+      item.setAttribute('tabindex', '-1');
+    }
+
+    if (s === 'set') {
+      item.setAttribute('id', tabID + '_ctr_' + i);
+      item.setAttribute('aria-labelledby', tabID + '_id_' + i);
+    }
+  }
+}
 
 const tabSelect = e => {
   console.log('select', e.currentTarget)
   const _this = e.currentTarget;
+  const _tab = _this.closest('.tab');
+  const _id = _tab.dataset.id;
   const _wrap = _this.closest('.tab--list');
   const _selected = _wrap.querySelector('.tab--item[aria-selected="true"]');
-  _selected.removeAttribute('aria-selected');
+  const _tabPanel = document.querySelector(`.tab-panel[data-id="${_id}"]`);
+  const _panels = _tabPanel.querySelectorAll('.panel--item');
+  const _key = _this.dataset.key;
+
+  _selected.setAttribute('aria-selected', false);
+  _selected.setAttribute('tabindex', '-1');
   _this.setAttribute('aria-selected', true);
+  _this.setAttribute('tabindex', 0);
+  actSelect(_panels, _key);
 }
 
-console.log('tab', document.querySelector('.tab-panel'))
+onMounted(() => {
+  //tab panel setting
+  const tabPanel = document.querySelector(`.tab-panel[data-id="${tabID}"]`);
+  const panels = tabPanel.querySelectorAll('.panel--item');
+
+  actSelect(panels, selectedTab, 'set');
+})
+
 </script>
 
 <template>
-  <div class="tab">
+  <div class="tab" :data-id="tabID">
     <ul class="tab--list" role="tablist">
       <li class="tab--item" role="tab" v-for="(_item, index) in tabList" :key="index" :data-key="index"
-        :aria-selected="(selectedTab === index ? true : false)" @click="tabSelect">
+        :aria-selected="(selectedTab === index ? true : false)" :id="(tabID + '_id_' + index)"
+        :aria-controls="(tabID + '_ctr_' + index)" :tabindex="(selectedTab === index ? 0 : -1)" @click="tabSelect">
         <span>{{ _item }}</span>
       </li>
     </ul>
   </div>
-  <div class="tab-panel" data->
+  <div class="tab-panel" :data-id="tabID">
     <slot name="panel"></slot>
   </div>
 </template>
 
-<style scoped lang="scss">
-.tab {
-  .tab--list {
-    display: flex;
-    background: #F2F3F5;
-    padding: .4rem;
-    border-radius: 1.2rem;
-  }
-
-  .tab--item {
-    position: relative;
-    flex: 1;
-    min-width: min-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: #98A0AD;
-    transition: color 500ms cubic-bezier(0, 0, 0.5, 1), font 500ms cubic-bezier(0, 0, 0.5, 1);
-
-    span {
-      position: relative;
-      z-index: 1;
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      background: #fff;
-      box-shadow: 0 .4rem 1.6rem rgba(0, 0, 0, 6%);
-      border-radius: .8rem;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      z-index: 0;
-      opacity: 0;
-      transform: scaleX(0.8);
-      transition: opacity 500ms cubic-bezier(0, 0, 0.5, 1), transform 200ms cubic-bezier(0, 0, 0.5, 1);
-    }
-
-    &[aria-selected="true"] {
-      font-weight: 700;
-      color: #101010;
-
-      &::after {
-        opacity: 1;
-        transform: scaleX(1);
-      }
-    }
-  }
-}
-</style>
+<style scoped lang="scss"></style>

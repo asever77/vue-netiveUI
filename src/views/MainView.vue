@@ -51,21 +51,44 @@ watch([isToastTest, isAlertTest], () => {
   <main class="base-main">
     <div class="base-content">
       <!-- 제목 컨포넌트로 변경필요할까 흐음... -->
-      <guide>제목 가이드</guide>
-      <div class="subject-group">
-        <h2 class="subject-group--heading" @click="toastShow">건강검진 플랜 추천</h2>
-        <strong class="subject-group--slogan" @click="alertShow">매번 어떤 검사를 받아야 할지 막막했다면?</strong>
-        <em class="subject-group--addition">내 성별과 나이에 맞는 검진 항목을 확인해 보세요.</em>
-      </div>
+      <guide>
+        <t>제목 가이드</t>
+        <div class="subject-group">
+          <h2 class="subject-group--heading" @click="toastShow">건강검진 플랜 추천</h2>
+          <strong class="subject-group--slogan" @click="alertShow">매번 어떤 검사를 받아야 할지 막막했다면?</strong>
+          <em class="subject-group--addition">내 성별과 나이에 맞는 검진 항목을 확인해 보세요.</em>
+        </div>
+      </guide>
 
-      <guide>button + modal</guide>
-      <StartModal :button="{
-        name: '시작하기',
-        class: 'btn--box'
-      }" />
 
-      <guide>tab</guide>
-      <TestTab1 />
+      <guide>
+        <t>Toast layer modal</t>
+        <button type="button" class="btn--box" @click="toastShow">
+          토스트팝업
+        </button>
+      </guide>
+
+      <guide>
+        <t>System layer modal</t>
+        <button type="button" class="btn--box" @click="alertShow">
+          시스템팝업
+        </button>
+      </guide>
+
+      <guide>
+        <t>button + layer modal</t>
+        <StartModal :button="{
+          name: '시작하기',
+          class: 'btn--box'
+        }" />
+      </guide>
+
+
+      <guide>
+        <t>tab</t>
+        <TestTab1 />
+      </guide>
+
     </div>
   </main>
 </template>

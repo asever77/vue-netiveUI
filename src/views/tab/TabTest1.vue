@@ -5,6 +5,7 @@ import TestTab1_2 from '@/views/tab/TabTest1-2.vue';
 import TestTab1_3 from '@/views/tab/TabTest1-3.vue';
 
 const TabData = {
+    id: 'plan3',
     selected: 2,
     tab: ['tab1', 'tab2', 'tab3'],
     panel: ['TabTest1', 'TabTest2', 'TabTest3']
