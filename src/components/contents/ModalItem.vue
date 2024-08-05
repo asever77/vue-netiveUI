@@ -10,6 +10,7 @@ const props = defineProps({
 const isHidden = ref(true);
 const isZindex = ref(null);
 const isViews = ref(null);
+const isLayer = ref(null);
 
 const dataModal = ref(props.data.modal);
 const dataBtn = ref(props.data.button);
@@ -21,6 +22,9 @@ const descID = dataModal.value.id + '_desc';
 const labelID = dataModal.value.id + '_label';
 const thisFocus = ref(null);
 const _body = document.querySelector('body');
+
+
+isLayer.value = !document.querySelector(`.layer-item[data-id="${dataModal.value.id}`);
 
 
 //실행
@@ -40,14 +44,15 @@ const open = () => {
   const layerItem = document.querySelector(`.layer-item[data-id="${dataModal.value.id}"]`);
   const layerWrap = layerItem.querySelector('.layer-item--wrap');
   const closeBtn = layerItem.querySelector('.layer-item--close');
-  // const closeBtHide = layerItem.querySelector('.layer-item--close-hide');
+  const closeBtHide = layerItem.querySelector('.layer-item--close-hide');
 
   //외부영역 접근막기
-  console.log('baseWrap', baseWrap);
+  console.log('baseWrap', baseWrap, layerItem);
   baseWrap.setAttribute('inert', 'true');
   baseWrap.setAttribute('aria-hidden', 'true');
 
   layerItem.dataset.active = 'true';
+  layerItem.setAttribute('aria-hidden', 'false');
   // store.commit("setZindex", store.getters.zindexUp);
 
   //z-index 값 설정
@@ -56,20 +61,20 @@ const open = () => {
   layerItem.style.zIndex = isZindex.value;
 
   //웹접근성 탭 포커스 가두기
-  // const a11y_keyStart = (e) => {
-  //   if (e.shiftKey && e.key === 'Tab') {
-  //     e.preventDefault();
-  //     closeBtHide.focus();
-  //   }
-  // }
-  // const a11y_keyEnd = (e) => {
-  //   if (!e.shiftKey && e.key === 'Tab') {
-  //     e.preventDefault();
-  //     closeBtn.focus();
-  //   }
-  // }
-  // closeBtn.addEventListener('keydown', a11y_keyStart);
-  // closeBtHide.addEventListener('keydown', a11y_keyEnd);
+  const a11y_keyStart = (e) => {
+    if (e.shiftKey && e.key === 'Tab') {
+      e.preventDefault();
+      closeBtHide.focus();
+    }
+  }
+  const a11y_keyEnd = (e) => {
+    if (!e.shiftKey && e.key === 'Tab') {
+      e.preventDefault();
+      closeBtn.focus();
+    }
+  }
+  closeBtn.addEventListener('keydown', a11y_keyStart);
+  closeBtHide.addEventListener('keydown', a11y_keyEnd);
 
   //css animation 끝나는 시점
   const actMotionEnd = () => {
@@ -82,10 +87,14 @@ const open = () => {
 
 
 }
-const close = () => {
+const close = e => {
+  const _this = e.currentTarget;
+  const layerItem = document.querySelector(`.layer-item[data-id="${_this.dataset.id}"]`);
   const baseWrap = document.querySelector('.base-wrap');
   //aria-hidden 값 > css animation
   isHidden.value = true;
+  layerItem.dataset.active = 'false';
+  layerItem.setAttribute('aria-hidden', 'true');
 
   //페이지 좌우 이동 효과
   if (dataModal.value.type === 'full-page') {
@@ -104,36 +113,38 @@ const close = () => {
     baseWrap.setAttribute('aria-hidden', 'false');
   }
 };
+// data-type: 'center' | 'bottom' | 'top' | 'full'
+// data-id: '{unique ID}'
+// aria-describedby: '{unique ID}_desc'
 </script>
 
 <template>
   <button type="button" :class="dataBtn.class" @click="open" v-if="dataBtn.name">{{ dataBtn.name }}</button>
 
   <Teleport to=".base-layer">
-    <!-- 
-      data-type: 'center' | 'bottom' | 'top' | 'full'
-      data-id: '{unique ID}'
-      aria-describedby: '{unique ID}_desc'
-     -->
-    <section class="layer-item" role="dialog" :data-type="dataModal.type" :data-id="dataModal.id"
-      :aria-labelledby="labelID" :aria-describedby="descID" :aria-hidden="isHidden">
-      <div class="layer-item--wrap" role="document" tabindex="-1">
-        <button type="button" class="layer-item--close" aria-label="레이어콘텐츠 닫기" @click="close">닫기</button>
+    <template v-if="isLayer">
+      <section class="layer-item" role="dialog" :data-type="dataModal.type" :data-id="dataModal.id"
+        :aria-labelledby="labelID" :aria-describedby="descID" :aria-hidden="isHidden">
+        <div class="layer-item--wrap" role="document" tabindex="-1">
+          <button type="button" class="layer-item--close" aria-label="레이어콘텐츠 닫기" @click="close"
+            :data-id="dataModal.id">닫기</button>
 
-        <div class="layer-item--head" v-if="$slots.head">
-          <slot name="head"></slot>
-        </div>
-        <div class="layer-item--body">
-          <slot name="body"></slot>
-        </div>
-        <div class="layer-item--foot" v-if="$slots.head">
-          <slot name="foot"></slot>
-        </div>
+          <div class="layer-item--head" v-if="$slots.head">
+            <slot name="head"></slot>
+          </div>
+          <div class="layer-item--body">
+            <slot name="body"></slot>
+          </div>
+          <div class="layer-item--foot" v-if="$slots.head">
+            <slot name="foot"></slot>
+          </div>
 
-        <button type="button" class="layer-item--close-hide" aria-label="레이어콘텐츠 닫기" @click="close">닫기</button>
-      </div>
-      <div class="layer-item--dim"></div>
-    </section>
+          <button type="button" class="layer-item--close-hide" aria-label="레이어콘텐츠 닫기" @click="close"
+            :data-id="dataModal.id">닫기</button>
+        </div>
+        <div class="layer-item--dim"></div>
+      </section>
+    </template>
   </Teleport>
 </template>
 

@@ -30,7 +30,6 @@ const actSelect = (v, n, s) => {
 }
 
 const tabSelect = e => {
-  console.log('select', e.currentTarget)
   const _this = e.currentTarget;
   const _tab = _this.closest('.tab');
   const _id = _tab.dataset.id;

@@ -18,6 +18,7 @@ const data = {
     class: props.button.class
   }
 }
+
 </script>
 
 <template>
