@@ -1,10 +1,17 @@
 <script setup>
 import { useStore } from 'vuex';
 import { inject, ref, watch } from 'vue';
+
 import StartModal from '@/views/modal/StartModal.vue';
-import TestTab1 from '@/views/tab/TabTest1.vue';
 import TermsModal from '@/views/modal/TermsModal.vue';//약관
+import TestTab1 from '@/views/tab/TabTest1.vue';
+import SwiperHero from '@/views/swiper/SwiperHero.vue';
+
 import Selection from '@/components/contents/SelectionItem';
+import ListItem from '@/components/contents/ListItem';
+
+
+
 
 const store = useStore();
 store.state.page = 1;
@@ -140,6 +147,7 @@ watch([isToastTest, isAlertTest], () => {
         </div>
       </guide>
 
+      <!--list-->
       <guide>
         <t>약관 리스트</t>
         <ul class="term-list">
@@ -170,10 +178,36 @@ watch([isToastTest, isAlertTest], () => {
             <div class="checkup-list--title">고밀도콜레스테롤 (HDL)</div>
           </li>
         </ul>
+
+        <t>검진 항목 리스트2</t>
+        <ListItem :data="{
+          title: '지질대사 및 심혈관계 검사',
+          list: [
+            { id: 'a_1', name: '총콜레스테롤' },
+            { id: 'a_2', name: '고밀도콜레스테롤(HDL)' },
+            { id: 'a_3', name: '저밀도콜레스테롤(LDL)' },
+            { id: 'a_4', name: '중성지방' }
+          ]
+        }" />
+        <ul class="checkup-list">
+          <li class="checkup-list--item">
+            <div class="checkup-list--icon"></div>
+            <div class="checkup-list--title">고밀도콜레스테롤 (HDL)</div>
+          </li>
+          <li class="checkup-list--item">
+            <div class="checkup-list--icon"></div>
+            <div class="checkup-list--title">고밀도콜레스테롤 (HDL)</div>
+          </li>
+        </ul>
       </guide>
 
+      <!--swiper-->
+      <guide>
+        <t>스와이프</t>
+        <SwiperHero />
+      </guide>
 
-
+      <!--layer modal : tooltip, alert, modal-->
       <guide>
         <t>Tooltip: 읽어야 하는 </t>
         <a href="#" class="tooltip" aria-disabled="true" role="presentation">
@@ -214,6 +248,7 @@ watch([isToastTest, isAlertTest], () => {
         }" />
       </guide>
 
+      <!--tab-->
       <guide>
         <t>tab</t>
         <TestTab1 />

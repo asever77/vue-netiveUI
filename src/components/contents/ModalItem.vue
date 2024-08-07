@@ -1,11 +1,14 @@
 <script setup>
 import { useStore } from 'vuex';
-import { defineProps, ref } from 'vue';
+import { defineProps, ref, defineEmits } from 'vue';
+
 
 const store = useStore();
 const props = defineProps({
   data: Object,
 });
+
+const emit = defineEmits(['call-act']);
 
 const isHidden = ref(true);
 const isZindex = ref(null);
@@ -23,12 +26,17 @@ const labelID = dataModal.value.id + '_label';
 const thisFocus = ref(null);
 const _body = document.querySelector('body');
 
-
 isLayer.value = !document.querySelector(`.layer-item[data-id="${dataModal.value.id}`);
-
 
 //실행
 const open = () => {
+  //동적으로 정보 가져오기
+  if (dataBtn.value.para) {
+    emit('call-act', {
+      call: dataBtn.value.para
+    });
+  }
+
   const baseWrap = document.querySelector('.base-wrap');
   //이전 포커스 저장
   thisFocus.value = document.activeElement;
@@ -84,8 +92,6 @@ const open = () => {
     layerWrap.removeEventListener('animationend', actMotionEnd);
   }
   layerWrap.addEventListener('animationend', actMotionEnd);
-
-
 }
 const close = e => {
   const _this = e.currentTarget;

@@ -1,0 +1,64 @@
+{
+	"a_1": {
+		"title": "뇌 MDCT",
+		"conts": [
+			{
+				"title": "검사설명",
+				"cont": "64CH MDCT란? <br />Multi-detector Computed Tomography의 약자로 기존 CT의 1개 검출기보다 업그레이드된 64개의 영상 검출기를 보유함으로써 단시간 (C-선관 일 회전 시간>0.4초) 동안0.625mm의 얇은 단면 영상을 64개 획득할 수 있습니다. <br />Multi-detector Computed Tomography의 약자로 기존 CT의 1개 검출기보다 업그레이드된 64개의 영상 검출기를 보유함으로써 단시간 (C-선관 일 회전 시간>0.4초) 동안0.625mm의 얇은 단면 영상을 64개 획득할 수 있습니다.",
+				"img": [
+					{
+							"src": "./assets/images/test.jpg",
+							"alt": "테스트이미지"
+					},
+					{
+							"src": "./assets/images/test.jpg",
+							"alt": "테스트이미지"
+					},
+					{
+							"src": "./assets/images/test.jpg",
+							"alt": "테스트이미지"
+					}
+				]
+			},
+			{
+				"title": "특징 및 장점",
+				"cont": [
+					"한번의 X선 방출로 후다랃ㄹ",
+					"한번의 X선 방출로 후다랃ㄹ",
+					"한번의 X선 방출로 후다랃ㄹ"
+				]
+			}
+		]
+	},
+	"a_2": {
+		"title": "뇌 MDCT2222",
+		"conts": [
+			{
+				"title": "검사설명22222",
+				"cont": "64CH MDCT란? <br />Multi-detector Computed Tomography의 약자로 기존 CT의 1개 검출기보다 업그레이드된 64개의 영상 검출기를 보유함으로써 단시간 (C-선관 일 회전 시간>0.4초) 동안0.625mm의 얇은 단면 영상을 64개 획득할 수 있습니다. <br />Multi-detector Computed Tomography의 약자로 기존 CT의 1개 검출기보다 업그레이드된 64개의 영상 검출기를 보유함으로써 단시간 (C-선관 일 회전 시간>0.4초) 동안0.625mm의 얇은 단면 영상을 64개 획득할 수 있습니다.",
+				"img": [
+					{
+							"src": "./assets/images/test.jpg",
+							"alt": "테스트이미지"
+					},
+					{
+							"src": "./assets/images/test.jpg",
+							"alt": "테스트이미지"
+					},
+					{
+							"src": "./assets/images/test.jpg",
+							"alt": "테스트이미지"
+					}
+				]
+			},
+			{
+				"title": "특징 및 장점",
+				"cont": [
+					"한번의 X선 방출로 후다랃ㄹ",
+					"한번의 X선 방출로 후다랃ㄹ",
+					"한번의 X선 방출로 후다랃ㄹ"
+				]
+			}
+		]
+	}
+}
