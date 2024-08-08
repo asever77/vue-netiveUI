@@ -189,16 +189,7 @@ watch([isToastTest, isAlertTest], () => {
             { id: 'a_4', name: '중성지방' }
           ]
         }" />
-        <ul class="checkup-list">
-          <li class="checkup-list--item">
-            <div class="checkup-list--icon"></div>
-            <div class="checkup-list--title">고밀도콜레스테롤 (HDL)</div>
-          </li>
-          <li class="checkup-list--item">
-            <div class="checkup-list--icon"></div>
-            <div class="checkup-list--title">고밀도콜레스테롤 (HDL)</div>
-          </li>
-        </ul>
+
       </guide>
 
       <!--swiper-->

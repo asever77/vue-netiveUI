@@ -1,10 +1,7 @@
-import { ref } from 'vue';
+// import { ref } from 'vue';
 
 export default {
 	install(Vue) {
-		const timer = ref();
-		console.log(timer);
-		
 		const toastModal = {
 			/**
 			 * options 
@@ -41,14 +38,12 @@ export default {
 					!!callback && callback();
 				}
 				const hide = (v) => {
-					console.log('hide', this)
 					setTimeout(() => {
 						el_toast.setAttribute('aria-hidden','true');
 						el_toast.addEventListener('animationend', clear);
 					}, v);
 				}
 				const act = e => {
-					console.log('act', this)
 					const _this = e.currentTarget;
 					_this.removeEventListener('animationend', act);
 					hide(time);
@@ -59,7 +54,6 @@ export default {
 				toast_html = null;
 				el_toast = document.querySelector(`.toast[data-id="${toastId}"`);
 				setTimeout(() => {
-					console.log('show', this)
 					el_toast.setAttribute('aria-hidden','false');
 					el_toast.addEventListener('animationend', act);
 				}, 100);

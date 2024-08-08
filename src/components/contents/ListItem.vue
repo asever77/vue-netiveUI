@@ -10,7 +10,6 @@ const props = defineProps({
 const _data = ref(props.data);
 const itemList = _data.value.list;
 
-console.log(_data)
 </script>
 
 <template>

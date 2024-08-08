@@ -6,7 +6,7 @@ import JsonData from '@/assets/data/checkup.json';
 const props = defineProps({
   button: Object
 });
-
+const _id = ref(null);
 const data_modal = {
   modal: {
     id: 'checkupInfoModal',
@@ -25,26 +25,16 @@ const data_modal = {
 }
 
 const info_data = ref(null);
-console.log(info_data.value)
 
 const callAct = (v) => {
-  console.log('callAct', v, props.button.para);
-
-  info_data.value = JsonData[props.button.para];
-
-  console.log(info_data.value)
+  _id.value = v;
+  console.log(_id.value.call, JsonData[_id.value.call]);
+  info_data.value = JsonData[_id.value.call];
 }
-const act = () => {
-  console.log('바뀌였어요', info_data.value);
 
-  const _thisModal = document.querySelector(`[data-id="${data_modal.modal.id}"]`);
-  const _thisModal_tit = _thisModal.querySelector('.layer-item--title');
-  console.log(_thisModal_tit, info_data.value.title)
-
-}
 watch(info_data, () => {
-
-  act();
+  console.log('watch', info_data.value);
+  // info_data.value = JsonData[_id.value.call];
 });
 
 </script>
@@ -63,8 +53,6 @@ watch(info_data, () => {
         <h3 v-html="_item.title"></h3>
         <div v-html="_item.cont"></div>
       </section>
-
-
     </template>
   </ModalItem>
 </template>

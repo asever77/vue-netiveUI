@@ -55,7 +55,7 @@ const open = () => {
   const closeBtHide = layerItem.querySelector('.layer-item--close-hide');
 
   //외부영역 접근막기
-  console.log('baseWrap', baseWrap, layerItem);
+  // console.log('baseWrap', baseWrap, layerItem);
   baseWrap.setAttribute('inert', 'true');
   baseWrap.setAttribute('aria-hidden', 'true');
 
