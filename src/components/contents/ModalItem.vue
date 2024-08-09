@@ -17,6 +17,7 @@ const isLayer = ref(null);
 
 const dataModal = ref(props.data.modal);
 const dataBtn = ref(props.data.button);
+const modalClass =  dataModal.value.class ? 'layer-item ' + dataModal.value.class: 'layer-item';
 
 isZindex.value = store.state.Layer.zindex;
 isViews.value = store.state.Layer.view;
@@ -65,7 +66,7 @@ const open = () => {
 
   //z-index 값 설정
   store.commit("setZindex", store.getters.zindexUp);
-  isZindex.value = store.state.Layer.zindex;
+  isZindex.value = store.state .Layer.zindex;
   layerItem.style.zIndex = isZindex.value;
 
   //웹접근성 탭 포커스 가두기
@@ -129,11 +130,10 @@ const close = e => {
 
   <Teleport to=".base-layer">
     <template v-if="isLayer">
-      <section class="layer-item" role="dialog" :data-type="dataModal.type" :data-id="dataModal.id"
+      <section :class="modalClass" role="dialog" :data-type="dataModal.type" :data-id="dataModal.id"
         :aria-labelledby="labelID" :aria-describedby="descID" :aria-hidden="isHidden">
-        <div class="layer-item--wrap" role="document" tabindex="-1">
-          <button type="button" class="layer-item--close" aria-label="레이어콘텐츠 닫기" @click="close"
-            :data-id="dataModal.id">닫기</button>
+        <div class="layer-item--wrap" role="document" tabindex="-1" :data-foot="$slots.foot">
+          <button type="button" class="layer-item--close" aria-label="레이어콘텐츠 닫기" @click="close" :data-id="dataModal.id"></button>
 
           <div class="layer-item--head" v-if="$slots.head">
             <slot name="head"></slot>
@@ -141,7 +141,7 @@ const close = e => {
           <div class="layer-item--body">
             <slot name="body"></slot>
           </div>
-          <div class="layer-item--foot" v-if="$slots.head">
+          <div class="layer-item--foot" v-if="$slots.foot">
             <slot name="foot"></slot>
           </div>
 

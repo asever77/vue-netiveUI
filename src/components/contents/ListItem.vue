@@ -17,7 +17,7 @@ const itemList = _data.value.list;
         <h3></h3>
         <ul class="">
             <li for v-for="(_item, index) in itemList" :key="index">
-                <CheckupInfoModal :button="{
+                <CheckupInfoModal :keyid="_item.id" :button="{
                     name: _item.name,
                     class: 'btn--text',
                     para: _item.id

@@ -20,10 +20,15 @@
   }
   
   &--title {
+    display: block;
     font-size: 2rem;
     font-weight: 700;
     padding: 0;
-    margin-bottom: 1.6rem;
+    margin-bottom: .8rem;
+  }
+
+  &--content {
+    color: #6B7583;
   }
   
   &--dim {
@@ -44,9 +49,10 @@
     background: #fff;
     position: relative;
     z-index: 1;
-    padding: 2.4rem;
+    min-width: 32.7rem;
+    padding: 3.2rem 2.4rem;
     opacity: 0;
-    border-radius: .8rem;
+    border-radius: 2.4rem;
     box-shadow: 0 0 .8rem rgba(0, 0, 0, 40%);
   }
   
@@ -62,7 +68,14 @@
     bottom: -10rem;
     opacity: 0;
   }
-
+  .btn--wrap {
+    padding-top:2.4rem;
+  }
+  .btn--box {
+    min-height: 4.8rem;
+    height: 4.8rem;
+    font-size: 1.6rem;
+  }
   &[data-type="center"] {
     align-items: center;
 

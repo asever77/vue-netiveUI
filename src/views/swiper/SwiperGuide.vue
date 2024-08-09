@@ -1,7 +1,5 @@
 <script setup>
-import { ref, defineEmits } from 'vue';
-
-import StartModal from '@/views/modal/StartModal.vue';
+import { ref } from 'vue';
 
 import { Navigation, Pagination, Autoplay, EffectFade, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
@@ -23,9 +21,6 @@ import 'swiper/css/a11y';
  */
 console.log(Swiper, SwiperSlide);
 
-const emit = defineEmits(['call-act']);
-
-const swiperPage = ref(0);
 const swiperOptions = ref({
 	// Autoplay 및 EffectFade는 사용할 때만 추가
 	modules: [Navigation, Pagination, Autoplay, EffectFade, A11y],
@@ -75,111 +70,33 @@ const swiperOptions = ref({
 // swiper의 event 확인 가능
 const onSwiper = (Swiper) => {
 	console.log(Swiper);
-	emit('call-act', {
-      call: Swiper.activeIndex
-    });
 };
 
 // swiper의 slide 감지
-const onSlideChange = (Swiper) => {
+const onSlideChange = () => {
 	console.log('slide change');
-	swiperPage.value = Swiper.activeIndex;
-	emit('call-act', {
-      call: Swiper.activeIndex
-    });
-
 };
 
 </script>
 
 <template>
-	<div class="hero" :data-hero="swiperPage">
+	<div>
 		<swiper v-bind="swiperOptions" @swiper="onSwiper" @slideChange="onSlideChange">
 			<swiper-slide>
-				<div class="subject-group">
-					<img class="ci" src="../../assets/images/CI.svg" alt="KB헬스케어">
-					<h2 class="subject-group--heading">
-						건강검진이 처음이거나 <br>
-						오랜만이라면?
-					</h2>
-					<em class="subject-group--addition">
-						내 성별과 나이에 맞는 검진 항목을 확인해 보세요.
-					</em>
-				</div>
+				<div class="a">Slide 1</div>
 			</swiper-slide>
 			<swiper-slide>
-				<div class="subject-group">
-					<img class="ci" src="../../assets/images/CI.svg" alt="KB헬스케어">
-					<h2 class="subject-group--heading">
-						비슷한 나이대가 선택한 <br>
-						검사 항목이 궁금할 때 
-					</h2>
-					<em class="subject-group--addition">
-						내 성별과 나이에 맞는 검진 항목을 확인해 보세요.
-					</em>
-				</div>
+				<div class="a">Slide 2</div>
 			</swiper-slide>
 			<swiper-slide>
-				<div class="subject-group">
-					<img class="ci" src="../../assets/images/CI.svg" alt="KB헬스케어">
-					<h2 class="subject-group--heading">
-						특정 질병을 더 꼼꼼하게 <br>
-						예방하고 싶을 때
-					</h2>
-					<em class="subject-group--addition">
-						내 성별과 나이에 맞는 검진 항목을 확인해 보세요.
-					</em>
-				</div>
+				<div class="a">Slide 3</div>
 			</swiper-slide>
-			
 		</swiper>
-		<div class="hero-start">
-			<StartModal :button="{
-			name: '건강검진 플랜 추천 시작하기',
-			class: 'btn--box'
-			}" />
-		</div>
 	</div>
 </template>
 
 <style scoped>
-.hero {
-	position: relative;
-	&::before {
-		content:"";
-		display: block;
-		position:absolute;
-		top:0; 
-		left: -1px;
-		width: calc(100% + 2px);
-		height:100%;
-		transition: all 500ms cubic-bezier(0,0,0.5,1);
-		opacity: .8;
-	}
-	
-	&[data-hero="0"]::before {
-		background: url(@/assets/images/main/hero-1.jpg) no-repeat 50% 50% / cover;
-	}
-	&[data-hero="1"]::before {
-		background: url(@/assets/images/main/hero-2.jpg) no-repeat 50%  50% / cover;
-	}
-	&[data-hero="2"]::before {
-		background: url(@/assets/images/main/hero-3.jpg) no-repeat 50% 50% / cover;
-
-	}
-
-	.hero-start {
-		position: absolute;
-		bottom:0;
-		width:100%;
-		max-width: 40rem;
-		left: 50%;
-		transform: translateX(-50%);
-		padding: 0 2.4rem 6.8rem;
-		z-index: 2;
-	}
+.a {
+	height: 30rem;
 }
-
-
-
 </style>

@@ -6,6 +6,7 @@ html,body {padding: 0;}
 /* See https://hankchizljaw.com/wrote/a-modern-css-reset/ */
 /* Box sizing rules */
 *,
+*::placeholder,
 *::before,
 *::after {
     box-sizing: border-box;
@@ -15,8 +16,8 @@ html,body {padding: 0;}
 }
 
 /* Remove default padding */
-ul[class],
-ol[class] {padding: 0;}
+ul,
+ol {padding: 0;}
 
 /* Remove default margin */
 body,
@@ -27,8 +28,8 @@ h4,
 h5,
 h6,
 p,
-ul[class],
-ol[class],
+ul,
+ol,
 li,
 figure,
 figcaption,
@@ -102,9 +103,9 @@ input,
 textarea,
 select {font: inherit;}
 
-select[class],
-textarea[class],
-input[class] {
+select,
+textarea,
+input {
 	appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
@@ -117,7 +118,7 @@ input[class] {
     appearance: none;
 }
 
-select[class]::-ms-expand {display: none;}
+select::-ms-expand {display: none;}
 
 /* Inherit fonts for buttons */
 button {
@@ -184,6 +185,11 @@ legend,
     opacity: 0.2 !important;
     box-shadow: none !important;
 }
+
+@media (max-width:374px) {
+    html{font-size:2.66vw;}
+}
+
 guide {
     flex-direction: column;
     display: flex;

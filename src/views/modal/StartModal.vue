@@ -5,7 +5,6 @@
  */
 import { inject, defineProps } from 'vue';
 import ModalItem from '@/components/contents/ModalItem';
-import TermsModal from '@/views/modal/TermsModal.vue';//약관
 
 const props = defineProps({
   button: Object
@@ -34,7 +33,9 @@ const alertShow = () => {
     control: [
       {
         name: '확인',
-        callback: alert(1111)
+        callback: () => {
+          console.log('확인완료')
+        }
       }
     ]
   });
@@ -45,12 +46,12 @@ const alertShow = () => {
 <template>
   <ModalItem :data="data_modal">
     <template #head>
-      <h2 class="layer-item--title" :id="data_modal.modal.aria.labelledby" tabindex="0">성별 선택 및 만 나이 입력</h2>
+      <h2 class="layer-item--title" :id="data_modal.modal.aria.labelledby" tabindex="0">성별 선택 및 나이 입력</h2>
     </template>
 
     <template #body>
       <!-- form grid -->
-      <div class="form-grid">
+      <fieldset class="form-grid">
         <!-- 성별 선택 -->
         <div class="form-grid--item">
           <div class="form-grid--head" id="baseData_gender_group">
@@ -69,32 +70,20 @@ const alertShow = () => {
         </div>
         <!-- 나이 입력 -->
         <div class="form-grid--item">
-          <label class="form-grid--head" for="baseData_age">만 나이를 숫자만 입력해 주세요. </label>
-          <div class="form-grid--body">
+          <label class="form-grid--head" for="baseData_age">나이를 숫자만 입력해 주세요.</label>
+          <div class="form-grid--body" style="max-width: calc(50% + 1.4rem);">
             <div class="form-item">
-              <input type="tel" class="form-item--inp" id="baseData_age" placeholder="만 나이 입력">
+              <input type="tel" class="form-item--inp" id="baseData_age" placeholder="두 자리 입력">
               <span class="form-item--text">세</span>
             </div>
 
           </div>
-          <div class="form-grid--msg">
-            ※만 19세 이상 사용자만 조회가 가능합니다.
+          <div class="form-grid--msg" data-bullet="start">
+            <div>20세 이상 사용자만 조회가 가능합니다.</div>
           </div>
         </div>
-      </div>
+      </fieldset>
       <!-- //form grid -->
-
-      <!-- term-list -->
-      <ul class="term-list">
-        <li class="term-list--item">
-          <p class="term-list--title">정보 확인 및 서비스 이용 약관에 동의합니다. </p>
-          <TermsModal :button="{
-            name: '약관보기',
-            class: 'btn--underline'
-          }" />
-        </li>
-      </ul>
-      <!-- //term-list -->
     </template>
 
     <template #foot>

@@ -1,4 +1,6 @@
 @import 'abstracts/variable';
+@import 'abstracts/svg';
+
 @import 'default/fonts';
 @import 'default/reset';
 @import 'default/base';
@@ -7,3 +9,6 @@
 @import 'components/toast';
 @import 'components/alert';
 @import 'components/tab';
+
+@import 'page/main';
+@import 'page/checkupInfo';
