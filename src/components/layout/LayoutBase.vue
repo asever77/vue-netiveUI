@@ -1,13 +1,11 @@
 <script setup>
 import HeaderBase from '@/components/common/HeaderBase.vue';
-import FooterBase from '@/components/common/FooterBase.vue';
 </script>
 
 <template>
   <div class="base-wrap">
     <HeaderBase />
     <router-view />
-    <FooterBase />
   </div>
 </template>
 
@@ -16,9 +14,9 @@ import FooterBase from '@/components/common/FooterBase.vue';
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 40rem;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2.4rem;
+  padding: 0;
   min-height: 100dvh;
 }
 </style>

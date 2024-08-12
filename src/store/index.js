@@ -1,7 +1,7 @@
 import { createStore } from 'vuex';
 import { Layer } from '@/store/modules/Layer'
-import { Checkup } from '@/store/modules/checkup'
+import { PageInfo } from '@/store/modules/PageInfo'
 
 export default createStore({
-  modules: { Layer, Checkup },
+  modules: { Layer, PageInfo },
 });

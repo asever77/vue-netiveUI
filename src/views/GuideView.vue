@@ -10,9 +10,6 @@ import SwiperGuide from '@/views/swiper/SwiperGuide.vue';
 import Selection from '@/components/contents/SelectionItem';
 import ListItem from '@/components/contents/ListItem';
 
-
-
-
 const store = useStore();
 store.state.page = 1;
 
@@ -182,6 +179,7 @@ watch([isToastTest, isAlertTest], () => {
         <t>검진 항목 리스트2</t>
         <ListItem :data="{
           title: '지질대사 및 심혈관계 검사',
+          event: 'link-modal', //'none', 'link', 'link-modal'
           list: [
             { id: 'a_1', name: '총콜레스테롤' },
             { id: 'a_2', name: '고밀도콜레스테롤(HDL)' },

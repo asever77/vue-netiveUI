@@ -59,11 +59,6 @@ watch([isToastTest, isAlertTest], () => {
   <main class="base-main">
     <div class="base-content" >
       <SwiperHero @call-act="callAct" />
-
-
-
- 
-
     </div>
   </main>
 </template>

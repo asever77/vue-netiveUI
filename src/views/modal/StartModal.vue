@@ -1,15 +1,11 @@
 <script setup>
-/**
- * 성별 선택 및 만 나이 입력
- * 
- */
 import { inject, defineProps } from 'vue';
 import ModalItem from '@/components/contents/ModalItem';
 
+//start modal data
 const props = defineProps({
   button: Object
 });
-const systemModal = inject('systemModal');
 const data_modal = {
   modal: {
     id: 'startModal',
@@ -25,6 +21,9 @@ const data_modal = {
     class: props.button.class
   }
 }
+
+//system modal
+const systemModal = inject('systemModal');
 const alertShow = () => {
   systemModal.show({
     id: 'alert_test1',
@@ -51,11 +50,11 @@ const alertShow = () => {
 
     <template #body>
       <!-- form grid -->
-      <fieldset class="form-grid">
+      <div class="form-grid">
         <!-- 성별 선택 -->
         <div class="form-grid--item">
           <div class="form-grid--head" id="baseData_gender_group">
-            성별을 선택해주세요.
+            성별을 선택해 주세요.
           </div>
           <ul class="form-grid--body" role="group" aria-labelledby="baseData_gender_group">
             <li class="form-item">
@@ -68,6 +67,7 @@ const alertShow = () => {
             </li>
           </ul>
         </div>
+
         <!-- 나이 입력 -->
         <div class="form-grid--item">
           <label class="form-grid--head" for="baseData_age">나이를 숫자만 입력해 주세요.</label>
@@ -76,13 +76,12 @@ const alertShow = () => {
               <input type="tel" class="form-item--inp" id="baseData_age" placeholder="두 자리 입력">
               <span class="form-item--text">세</span>
             </div>
-
           </div>
           <div class="form-grid--msg" data-bullet="start">
             <div>20세 이상 사용자만 조회가 가능합니다.</div>
           </div>
         </div>
-      </fieldset>
+      </div>
       <!-- //form grid -->
     </template>
 

@@ -178,13 +178,52 @@ legend,
     word-break: normal;
 }
 
-*.disabled,
-*:disabled {
-    pointer-events: none !important;
-    cursor: default !important;
-    opacity: 0.2 !important;
-    box-shadow: none !important;
+$gap: .8rem;
+@for $i from 0 through 30 {
+    .m {
+        &g-x#{$i} {margin: calc($gap * $i) !important;}
+        &b-x#{$i} {margin-bottom: calc($gap * $i) !important;}
+        &t-x#{$i} {margin-top: calc($gap * $i) !important;}
+        &l-x#{$i} {margin-left: calc($gap * $i) !important;}
+        &r-x#{$i} {margin-right: calc($gap * $i) !important;}
+        &g-x#{$i}-5 {margin: calc($gap * $i + $gap / 2) !important;}
+        &b-x#{$i}-5 {margin-bottom: calc($gap * $i + $gap / 2) !important;}
+        &t-x#{$i}-5 {margin-top: calc($gap * $i + $gap / 2) !important;}
+        &l-x#{$i}-5 {margin-left: calc($gap * $i + $gap / 2) !important;}
+        &r-x#{$i}-5 {margin-right: calc($gap * $i + $gap / 2) !important;}
+    }
+    .p {
+        &d-x#{$i} {padding: calc($gap * $i) !important;}
+        &b-x#{$i} {padding-bottom: calc($gap * $i) !important;}
+        &t-x#{$i} {padding-top: calc($gap * $i) !important;}
+        &l-x#{$i} {padding-left: calc($gap * $i) !important;}
+        &r-x#{$i} {padding-right: calc($gap * $i) !important;}
+        &lr-x#{$i} {padding-left: calc($gap * $i) !important; padding-right: calc($gap * $i) !important;}
+
+        &d-x#{$i}-5 {padding: calc($gap * $i + $gap / 2) !important;}
+        &b-x#{$i}-5 {padding-bottom: calc($gap * $i + $gap / 2) !important;}
+        &t-x#{$i}-5 {padding-top: calc($gap * $i + $gap / 2) !important;}
+        &l-x#{$i}-5 {padding-left: calc($gap * $i + $gap / 2) !important;}
+        &r-x#{$i}-5 {padding-right: calc($gap * $i + $gap / 2) !important;}
+
+        &lr-x#{$i}-5 {padding-left: calc($gap * $i + $gap / 2) !important; padding-right: calc($gap * $i + $gap / 2) !important;}
+    }
+    .w {
+        &-x#{$i} {width: calc($gap * $i) !important;} 
+        &-x#{$i}-5 {width: calc($gap * $i + $gap / 2) !important;}
+    }
+    .h {
+        &-x#{$i} {height: calc($gap * $i) !important;} 
+        &-x#{$i}-5 {height: calc($gap * $i + $gap / 2) !important;}
+    }
 }
+// *.disabled,
+// *:disabled {
+//     pointer-events: none !important;
+//     cursor: default !important;
+//     opacity: 0.2 !important;
+//     box-shadow: none !important;
+// }
 
 @media (max-width:374px) {
     html{font-size:2.66vw;}

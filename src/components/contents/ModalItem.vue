@@ -66,7 +66,7 @@ const open = () => {
 
   //z-index 값 설정
   store.commit("setZindex", store.getters.zindexUp);
-  isZindex.value = store.state .Layer.zindex;
+  isZindex.value = store.state.Layer.zindex;
   layerItem.style.zIndex = isZindex.value;
 
   //웹접근성 탭 포커스 가두기

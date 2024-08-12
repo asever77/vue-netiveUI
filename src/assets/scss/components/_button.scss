@@ -1,0 +1,44 @@
+//버튼
+.btn {
+  &--wrap {
+    position: relative;
+    display: flex;
+    gap: $x1;
+    padding:2
+  }
+  &--box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #FCD412;
+    border-radius: $x1;
+    color: #000;
+    padding: .4rem $x2;
+    min-height: $x8;
+    font-size: 1.8rem;
+    font-weight: 600;
+
+    &:disabled {
+      opacity: 1;
+      background-color: #F2F3F5;
+      color: #505866;
+    }
+  }
+  &--underline{
+    text-decoration: underline;
+    text-underline-offset: .3rem;
+  }
+
+  &--back {
+    width: 3rem;
+    height: 3rem;
+    background: $back no-repeat 50% 50% / 3rem;
+  }
+  &--close {
+    width: 3rem;
+    height: 3rem;
+    background: $close no-repeat 50% 50% / 3rem;
+  }
+}
