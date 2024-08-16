@@ -19,4 +19,10 @@ import HeaderBase from '@/components/common/HeaderBase.vue';
   padding: 0;
   min-height: 100dvh;
 }
+.base-main {
+  max-height: calc(100dvh - 5.6rem);
+  height:100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 </style>

@@ -1,12 +1,17 @@
 <script setup>
+import { ref } from 'vue';
+import { useStore } from 'vuex';
+
 import TabItem from '@/components/contents/TabItem';
 import PlanTab_1 from '@/views/tab/PlanTab-1.vue';
 import PlanTab_2 from '@/views/tab/PlanTab-2.vue';
 import PlanTab_3 from '@/views/tab/PlanTab-3.vue';
 
+const store = useStore();
+const tabSelected = ref(store.state.PageInfo.tab);
 const TabData = {
     id: 'planTab',
-    selected: 1,
+    selected: Number(tabSelected.value),
     tab: ['베이직', '스탠다드', '프리미엄']
 }
 </script>

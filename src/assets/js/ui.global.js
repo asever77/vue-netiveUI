@@ -94,7 +94,7 @@ export default {
 					html += `<div class="btn--wrap">`;
 					for (let i = 0, len = control.length; i < len; i++) {
 						const item = control[i];
-						html += `<button type="button" class="btn--box"><span>${item.name}</span></button>`;
+						html += `<button type="button" class="btn--box" data-style="${i === 0 && len > 1 ? 'white' : 'primary'}"><span>${item.name}</span></button>`;
 					}
 					html += `</div>`;
 				} else {

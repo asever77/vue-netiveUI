@@ -2,7 +2,7 @@
 import { useStore } from 'vuex';
 import { inject, ref, watch } from 'vue';
 
-import StartModal from '@/views/modal/StartModal.vue';
+import StartModal from '@/views/modal/NEW_FE_HO_00_01.vue';
 import TermsModal from '@/views/modal/TermsModal.vue';//약관
 import TestTab1 from '@/views/tab/TabTest1.vue';
 import SwiperGuide from '@/views/swiper/SwiperGuide.vue';

@@ -26,7 +26,7 @@ const act = e => {
     <div class="list" :data-style="_data.style ? _data.style : null">
         <ul class="list--wrap">
             <li class="list--item" v-for="(_item, index) in itemList" :key="index" :data-icon="_item.icon ? _item.icon : null">
-                <template v-if="(itemEvent === 'link')">
+                <template v-if="itemEvent">
                     <button type="button" @click="act" :data-id="_item.id">
                         {{ _item.name }}
                     </button>

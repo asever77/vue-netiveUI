@@ -1,13 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import MainView from '@/views/MainView.vue';
 import GuideView from '@/views/GuideView.vue';
-import CheckupView from '@/views/CheckupView.vue';
-import PlanView from '@/views/PlanView.vue';
-import PlanDetailView from '@/views/PlanDetailView.vue';
+import NEW_FE_HO_00 from '@/views/NEW_FE_HO_00.vue';
+
+import NEW_FE_ST_01 from '@/views/NEW_FE_ST_01.vue';
+import NEW_FE_ST_02 from '@/views/NEW_FE_ST_02.vue';
+import NEW_FE_ST_03 from '@/views/NEW_FE_ST_03.vue';
 
 import LayoutBase from '@/components/layout/LayoutBase.vue';
 import LayoutMain from '@/components/layout/LayoutMain.vue';
+import LayoutError from '@/components/layout/LayoutError.vue';
 
 const routes = [
   {
@@ -17,11 +19,13 @@ const routes = [
     children: [
       {
         path: '/',
-        name: 'MainView',
-        component: MainView,
+        name: 'NEW_FE_HO_00',
+        component: NEW_FE_HO_00,
       },
-
     ],
+    meta: {
+      depth:1,
+    }
   },
   {
     path: '/',
@@ -32,46 +36,77 @@ const routes = [
         name: "LoginView",
         component: GuideView,
       },
-    ]
+    ],
+    meta: {
+      depth:1,
+    }
   },
   {
     path: '/',
     component: LayoutBase,
     children: [
       {
-        path: '/checkup',
-        name: "CheckupView",
-        component: CheckupView,
+        path: '/plan1',
+        name: "NEW_FE_ST_01",
+        component: NEW_FE_ST_01,
       },
-    ]
+    ],
+    meta: {
+      depth:2,
+    }
   },
   {
     path: '/',
     component: LayoutBase,
     children: [
       {
-        path: '/plan',
-        name: "PlanView",
-        component: PlanView,
+        path: '/plan2',
+        name: "NEW_FE_ST_02",
+        component: NEW_FE_ST_02,
       },
-    ]
+    ],
+    meta: {
+      depth:3,
+    }
   },
   {
     path: '/',
     component: LayoutBase,
     children: [
       {
-        path: '/detail',
-        name: "PlanDetailView",
-        component: PlanDetailView,
+        path: '/plan3',
+        name: "NEW_FE_ST_03",
+        component: NEW_FE_ST_03,
       },
-    ]
+    ],
+    meta: {
+      depth:4,
+    }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: "/404",
+    component: LayoutError,
+    children: [
+      {
+        path: '/404',
+        name: "NEW_FE_404",
+        component:() => import("@/views/NEW_FE_404.vue"),
+      },
+    ],
+    meta: {
+      depth:1,
+    }
   },
 ];
 
 const router = createRouter({
+  mode: 'history',
   history: createWebHistory(process.env.BASE_URL),
   routes,
+  scrollBehavior() {
+    return { top: 0 };
+  }
 });
 
 export default router;

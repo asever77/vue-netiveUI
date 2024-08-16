@@ -1,8 +1,18 @@
 .checkup-info {
-	.layer-item--body {
-		max-height:calc(100dvh - 5.6rem) !important;
-		padding-bottom: 4rem;
+	&[data-type="bottom-sheet"] {
+		.layer-item--body {
+			max-height:calc(100dvh - 12.6rem) !important;
+			padding: 0 0 4rem;
+			overflow-y: auto;
+		}
 	}
+	&[data-type="full-page"] {
+		.layer-item--body {
+			max-height:calc(100dvh - 5.6rem) !important;
+			padding-bottom: 4rem;
+		}
+	}
+	
 	.wrap-sec {
 		position: relative;
 		padding:0 2.4rem;

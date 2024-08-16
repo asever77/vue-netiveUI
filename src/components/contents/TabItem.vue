@@ -1,6 +1,8 @@
 <script setup>
+import { useStore } from 'vuex';
 import { defineProps, ref, onMounted } from 'vue';
 
+const store = useStore();
 const props = defineProps({
   data: Object,
 });
@@ -27,6 +29,9 @@ const actSelect = (v, n, s) => {
       item.setAttribute('aria-labelledby', tabID + '_id_' + i);
     }
   }
+
+  store.state.PageInfo.tab = n;
+  store.commit("tabSelect", store.state.PageInfo.tab);
 }
 
 const tabSelect = e => {
@@ -53,6 +58,8 @@ onMounted(() => {
 
   actSelect(panels, selectedTab, 'set');
 });
+
+
 
 
 </script>

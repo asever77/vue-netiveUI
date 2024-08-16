@@ -1,6 +1,6 @@
 <script setup>
 import { useStore } from 'vuex';
-import { defineProps, ref, defineEmits } from 'vue';
+import { defineProps, ref, defineEmits, defineExpose } from 'vue';
 
 
 const store = useStore();
@@ -9,7 +9,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['call-act']);
-
+console.log(emit);
 const isHidden = ref(true);
 const isZindex = ref(null);
 const isViews = ref(null);
@@ -32,16 +32,16 @@ isLayer.value = !document.querySelector(`.layer-item[data-id="${dataModal.value.
 //실행
 const open = () => {
   //동적으로 정보 가져오기
-  if (dataBtn.value.para) {
-    emit('call-act', {
-      call: dataBtn.value.para
-    });
-  }
+  // console.log('dataBtn', dataBtn);
+  // if (dataBtn.value.para) {
+  //   emit('call-act', {
+  //     call: dataBtn.value.para
+  //   });
+  // }
 
   const baseWrap = document.querySelector('.base-wrap');
   //이전 포커스 저장
   thisFocus.value = document.activeElement;
-
   //aria-hidden 값 > css animation
   isHidden.value = false;
 
@@ -94,6 +94,7 @@ const open = () => {
   }
   layerWrap.addEventListener('animationend', actMotionEnd);
 }
+
 const close = e => {
   const _this = e.currentTarget;
   const layerItem = document.querySelector(`.layer-item[data-id="${_this.dataset.id}"]`);
@@ -123,10 +124,15 @@ const close = e => {
 // data-type: 'center' | 'bottom' | 'top' | 'full'
 // data-id: '{unique ID}'
 // aria-describedby: '{unique ID}_desc'
+
+defineExpose({open});
+
 </script>
 
 <template>
-  <button type="button" :class="dataBtn.class" @click="open" v-if="dataBtn.name">{{ dataBtn.name }}</button>
+  <template v-if="dataBtn">
+    <button type="button" :class="dataBtn.class" @click="open" v-if="dataBtn.name">{{ dataBtn.name }}</button>
+  </template>
 
   <Teleport to=".base-layer">
     <template v-if="isLayer">

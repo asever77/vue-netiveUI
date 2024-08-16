@@ -1,3 +1,6 @@
+a[role="text"] {
+  text-decoration: none;
+}
 /* 말줄임 */
 [data-ellipsis] {
   text-overflow: ellipsis;
@@ -43,7 +46,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: $x2;
+  gap: .8rem;
 
   &--heading {
     position: relative;
@@ -56,28 +59,18 @@
 
   &--addition {
     position: relative;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 500;
     color: #666;
     letter-spacing: -2%;
   }
 }
-
+[data-layout="bottom-fixed"] {
+  padding-bottom: 12rem;
+}
 //박스
-.wrap-sec {
-  position: relative;
-  width: 100%;
-  padding: 2.4rem;
-}
-.wrap-box {
-  position: relative;
-  background-color: #fff;
-  padding: 4rem 3.2rem;
-  border:1px solid #EDEFF2;
-  box-shadow: 0 .4rem 1.6rem 0 #0000000F;
-  border-radius: 2.4rem;
-  width: 100%;
-}
+
+
 //입력그리드
 .form-grid {
   position: relative;
@@ -146,7 +139,9 @@
     border-radius: $x1 !important;
     border: 1px solid #E4E8EC;
     padding: $x1 1.6rem;
-    color: #505866;
+    color: #101010;
+    font-weight: 600;
+    font-size: 1.8rem;
     background-color: #fff !important;
     flex: 1;
 

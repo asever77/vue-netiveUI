@@ -8,3 +8,15 @@ MainView.vue
 ## Modal 관련파일
 /views/modal/
 페이지명 뒤에 Modal을 붙인다.
+
+
+NEW_FE_HO_00
+NEW_FE_HO_00_01
+
+NEW_FE_ST_01
+NEW_FE_ST_02 
+NEW_FE_ST_03
+NEW_FE_ST_03_01
+
+NEW_FE_404
+NEW_FE_MP

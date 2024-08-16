@@ -1,9 +1,11 @@
 @import 'abstracts/variable';
-@import 'abstracts/svg';
 
+@import 'default/svg';
+@import 'default/icon';
 @import 'default/fonts';
 @import 'default/reset';
 @import 'default/base';
+
 
 @import 'components/layer';
 @import 'components/toast';
@@ -11,6 +13,10 @@
 @import 'components/tab';
 @import 'components/button';
 @import 'components/list';
+@import 'components/acco';
+@import 'components/wrap';
+
+
 
 @import 'page/main';
 @import 'page/checkupInfo';
