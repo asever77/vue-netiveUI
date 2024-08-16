@@ -108,7 +108,7 @@ const info_data = ref(null);
 const data_NEW_FE_ST_03_01 = {
   modal: {
     id: 'NEW_FE_ST_03_01',
-    type: 'bottom-sheet',
+    type: 'full-page', //full-page
     class: 'checkup-info',
     aria: {
       labelledby: 'NEW_FE_ST_03_01_label',

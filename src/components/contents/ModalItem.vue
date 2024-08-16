@@ -131,14 +131,14 @@ defineExpose({open});
 
 <template>
   <template v-if="dataBtn">
-    <button type="button" :class="dataBtn.class" @click="open" v-if="dataBtn.name">{{ dataBtn.name }}</button>
+    <button type="button" :class="dataBtn.class" @click="open" v-if="dataBtn.name" v-html="dataBtn.name"></button>
   </template>
 
   <Teleport to=".base-layer">
     <template v-if="isLayer">
       <section :class="modalClass" role="dialog" :data-type="dataModal.type" :data-id="dataModal.id"
         :aria-labelledby="labelID" :aria-describedby="descID" :aria-hidden="isHidden">
-        <div class="layer-item--wrap" role="document" tabindex="-1" :data-foot="$slots.foot">
+        <div class="layer-item--wrap" role="document" tabindex="-1" :data-foot="$slots.foot ? true : false">
           <button type="button" class="layer-item--close" aria-label="레이어콘텐츠 닫기" @click="close" :data-id="dataModal.id"></button>
 
           <div class="layer-item--head" v-if="$slots.head">

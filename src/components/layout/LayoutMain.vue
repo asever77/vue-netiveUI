@@ -18,5 +18,6 @@ import FooterBase from '@/components/common/FooterBase.vue';
   margin: 0 auto;
   padding: 0;
   min-height: 100dvh;
+  overflow-x:hidden;
 }
 </style>

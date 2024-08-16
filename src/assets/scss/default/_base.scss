@@ -72,13 +72,16 @@ a[role="text"] {
 
 
 //입력그리드
+.layer-item--body .form-grid {
+  padding:0 2.4rem;
+}
 .form-grid {
   position: relative;
   display: flex;
   flex-direction: column;
   gap: $x3;
   border:0;
-  padding:0;
+
 
   &--item{
     position: relative;
@@ -231,3 +234,25 @@ a[role="text"] {
   }
 }
 
+.slide-l-enter-active, 
+.slide-l-leave-active,
+.slide-r-enter-active, 
+.slide-r-leave-active {
+  transition: transform .3s;
+  position: absolute;
+}
+
+.slide-l-enter, 
+.slide-r-leave-active {
+  transform: translateX(100%);
+}
+
+.slide-r-enter, 
+.slide-l-leave-active {
+  transform: translateX(-100%);
+}
+
+.slide-l-leave-active, 
+.slide-r-enter {
+  transform: translateX(0);
+}

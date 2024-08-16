@@ -109,11 +109,15 @@ body[data-page-swiper="off"] {
       border-bottom-right-radius: 0;
     }
     .layer-item--body {
-      padding:0 2.4rem 2.4rem;
+      // padding:0 2.4rem 2.4rem;
       max-width: 40rem;
       width: 100%;
       margin: 0 auto;
-    }
+
+			max-height:calc(100dvh - 12.6rem) !important;
+			padding: 0 0 4rem;
+			overflow-y: auto;
+		}
     .layer-item--foot {
       padding:0 2.4rem 4rem;
       max-width: 40rem;
@@ -221,11 +225,36 @@ body[data-page-swiper="off"] {
       border-radius: 0;
     }
     .layer-item--body {
-      max-height: calc(100dvh - 14rem);
       overflow-y: auto;
       overflow-x: hidden;
+      max-height:calc(100dvh - 5.6rem) !important;
+      padding-bottom: 4rem;
     }
 
+    [data-foot="true"] {
+      .layer-item--body {
+        overflow-y: auto;
+        overflow-x: hidden;
+        max-height:calc(100dvh - (5.6rem + 12.8rem)) !important;
+      }
+    }
+   
+    .layer-item--head {
+      height: 5.6rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+      .layer-item--title {
+        margin-bottom: 0;
+        font-size: 2rem;
+        font-weight: 700;
+        padding: 0;
+      }
+    }
+    .layer-item--foot {
+      padding:2.4rem 2.4rem 4rem;
+    }
     &[aria-hidden="true"] {
       animation-name: modalClose;
       animation-duration: 1s;
