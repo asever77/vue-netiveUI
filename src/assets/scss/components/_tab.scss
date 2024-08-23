@@ -1,7 +1,8 @@
 .tab {
-  position: relative;
+  position: sticky;
   margin-bottom: 2rem;
-
+  top:0;
+  z-index: 1;
   .tab--list {
     display: flex;
     background: #F2F3F5;

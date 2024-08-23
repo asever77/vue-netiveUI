@@ -1,7 +1,7 @@
 body[data-page-swiper="on"] {
   .layer-item[data-type="bottom-sheet"],
   .base-wrap {
-    width: 100vw;
+    width: 100%;
     transform: translateX(-100vw);
     transition: transform 320ms cubic-bezier(0, 0, 0.5, 1);
     transition-delay: 130ms;
@@ -10,14 +10,30 @@ body[data-page-swiper="on"] {
 body[data-page-swiper="off"] {
   .layer-item[data-type="bottom-sheet"],
   .base-wrap {
-    width: 100vw;
+    width: 100%;
     transform: translateX(0);
     transition: transform 180ms cubic-bezier(0, 0, 0.5, 1);
     transition-delay: 0;
   }
 }
+body[data-layer="true"] .base-layer {
+  pointer-events: visible;
+}
+.base-layer {
+  position: absolute;
+  max-width: var(--max_width);
+  height: 100%;
+  top:0;
+  width:100%;
+
+  // width: calc(100% + 2px);
+  // left:calc(50% - 1px);
+  // transform: translate(-50%);
+  overflow: hidden;
+  pointer-events: none;
+}
 .layer-item {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -43,6 +59,10 @@ body[data-page-swiper="off"] {
     font-weight: 700;
     padding: 0;
     margin-bottom: 1.6rem;
+    max-width: calc(100% - 13rem);
+    text-align: center;
+    line-height: 1.2;
+    word-break: break-all;
   }
   
   &--dim {
@@ -96,10 +116,11 @@ body[data-page-swiper="off"] {
       line-height: 1.5;
       padding: 0;
       margin-bottom: 0;
+      color: #101010;
     }
     .layer-item--head {
       padding: 4rem 2.4rem 2.4rem;
-      max-width: 40rem;
+      max-width: var(--max_width);
       width: 100%;
       margin: 0 auto;
     }
@@ -110,17 +131,16 @@ body[data-page-swiper="off"] {
     }
     .layer-item--body {
       // padding:0 2.4rem 2.4rem;
-      max-width: 40rem;
+      max-width: var(--max_width);
       width: 100%;
       margin: 0 auto;
 
 			max-height:calc(100dvh - 12.6rem) !important;
-			padding: 0 0 4rem;
 			overflow-y: auto;
 		}
     .layer-item--foot {
-      padding:0 2.4rem 4rem;
-      max-width: 40rem;
+      padding:2.4rem 2.4rem 4rem;
+      max-width: var(--max_width);
       width: 100%;
       margin: 0 auto;
     }

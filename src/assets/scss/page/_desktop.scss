@@ -1,0 +1,100 @@
+
+
+.desktop-body{
+  max-width: var(--max_width);
+  width: 100%;
+  position: relative;
+}
+.desktop-body > .subject-group,
+.subject-group[data-style="desktop"] {
+  gap:4.8rem;
+  .ci{
+    width: 19.4rem;
+  }
+  .subject-group--heading {
+    font-family: 'KBF';
+    font-size: 4.8rem;
+    line-height: 1.5;
+    color:#505866;
+    font-weight: 300;
+    b {
+      display:block;
+      font-weight: 700;
+      color:#000;
+    }
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width:1090px) {
+  //pc
+  body {
+    overflow: visible;
+  }
+  .wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .desktop-body > .subject-group,
+  .desktop-footer{display: flex;}
+  // .wrap-app .base-footer {display: none;}
+  .desktop-body {
+    max-width: 109rem;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 0;
+    align-items: center;
+    padding:0;
+  }
+  .desktop-footer {
+    width: 100%;
+    background-color: #fff;
+    padding:8rem 4rem 8.6rem;
+    display: flex;
+    justify-content: center;
+
+    .base-footer {
+      max-width: 109rem;
+      width: 100%;
+    }
+    .base-footer .wrap-sec {
+      max-width: 100%;
+      padding: 0;
+    }
+    .base-footer--ci {
+      width: 19.4rem;
+    }
+    .base-footer--link .btn--text {
+      font-family: 'KBF';
+      font-size: 1.6rem;
+    }
+    .base-footer--address {
+      font-family: 'KBF';
+      span {display: block; margin: .4rem 0;}
+      span br {display: none;}
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: .8rem;
+    height: 1.2rem;
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: .8rem;
+    background-clip: padding-box;
+    border: .1rem solid transparent;
+  }
+  ::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+  :hover::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: all 200ms;
+  }
+}

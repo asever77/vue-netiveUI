@@ -5,16 +5,16 @@ const dataList = {
     style: 'checkup-major',
     event: 'none', //'none', 'link', 'link-modal'
     list: [
-        { icon: '2-1', name: '갑상선초음파' },
-        { icon: '2-2', name: '위내시경' },
-        { icon: '2-3', name: '상복부초음파' }
+        { icon: '2-1', name: '갑상선초음파', event: false, },
+        { icon: '2-2', name: '위내시경', event: false, },
+        { icon: '2-3', name: '상복부초음파', event: false, }
     ]
 }
 </script>
 
 <template>
     <section class="wrap-box">
-        <RouterLink :to="{name: 'NEW_FE_ST_03'}" role="text">
+        <RouterLink :to="{name: 'NEW_FE_ST_03', params:{ planID: 'standard'}}" role="text">
             <div class="subject-group">
                 <h2 class="subject-group--heading">
                     스탠다드 플랜

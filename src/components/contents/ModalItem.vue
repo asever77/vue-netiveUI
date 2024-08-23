@@ -49,7 +49,7 @@ const open = () => {
   if (dataModal.value.type === 'full-page') {
     _body.dataset.pageSwiper = "on";
   }
-
+  _body.dataset.layer = true;
   const layerItem = document.querySelector(`.layer-item[data-id="${dataModal.value.id}"]`);
   const layerWrap = layerItem.querySelector('.layer-item--wrap');
   const closeBtn = layerItem.querySelector('.layer-item--close');
@@ -95,11 +95,12 @@ const open = () => {
   layerWrap.addEventListener('animationend', actMotionEnd);
 }
 
-const close = e => {
-  const _this = e.currentTarget;
-  const layerItem = document.querySelector(`.layer-item[data-id="${_this.dataset.id}"]`);
+const close = () => {
+  // const _this = e.currentTarget;
+  const layerItem = document.querySelector(`.layer-item[data-id="${dataModal.value.id}"]`);
   const baseWrap = document.querySelector('.base-wrap');
   //aria-hidden 값 > css animation
+  _body.dataset.layer = false;
   isHidden.value = true;
   layerItem.dataset.active = 'false';
   layerItem.setAttribute('aria-hidden', 'true');
@@ -125,7 +126,10 @@ const close = e => {
 // data-id: '{unique ID}'
 // aria-describedby: '{unique ID}_desc'
 
-defineExpose({open});
+defineExpose({
+  open,
+  close
+});
 
 </script>
 

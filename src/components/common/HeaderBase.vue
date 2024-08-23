@@ -3,13 +3,12 @@ import { inject } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 
+const UI = inject('UI');
 const store = useStore();
-console.log(store)
-
 const router = useRouter();
-const systemModal = inject('systemModal');
+
 const alertShow = () => {
-  systemModal.show({
+  UI.systemModal.show({
     id: 'alert_test1',
     title: '추천 플랜 조회를 그만하시겠습니까?',
     content: '데이터가 초기화되고 홈으로 이동합니다. ',

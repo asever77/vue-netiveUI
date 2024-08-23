@@ -5,7 +5,7 @@
 @import 'default/fonts';
 @import 'default/reset';
 @import 'default/base';
-
+@import 'default/layout';
 
 @import 'components/layer';
 @import 'components/toast';
@@ -16,8 +16,10 @@
 @import 'components/acco';
 @import 'components/wrap';
 @import 'components/term';
+@import 'components/bullet';
 
 
 
-@import 'page/main';
-@import 'page/checkupInfo';
+@import 'page/NEW_FE_HO_00';
+@import 'page/NEW_FE_ST_03_01';
+@import 'page/desktop';

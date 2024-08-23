@@ -1,4 +1,26 @@
 @charset "utf-8";
+/*KB font*/
+@font-face { 
+	font-family: 'KBF'; 
+	font-style: normal; 
+	font-weight: 300; 
+	src: local(""), 
+		url("@/assets/fonts/KBFGDISPLAYL.woff2") format("woff2");
+}  
+@font-face { 
+	font-family: 'KBF'; 
+	font-style: normal; 
+	font-weight: 400; 
+	src: local(""), 
+		url("@/assets/fonts/KBFGDISPLAYM.woff2") format("woff2");
+}
+@font-face { 
+	font-family: 'KBF'; 
+	font-style: normal; 
+	font-weight: 700; 
+	src: local(""), 
+		url("@/assets/fonts/KBFGDISPLAYB.woff2") format("woff2");
+}
 
 html {font-size: 10px;}
 html,body {padding: 0;}

@@ -1,11 +1,26 @@
 .wrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  
+  & > .subject-group{
+    display: none;
+  }
+
+  &-app {
+    position: relative;
+    max-width: var(--max_width);
+    overflow: hidden;
+    background-color: #fff;
+    width: 100%;
+  }
   &--btn {
     position: relative;
     display: flex;
     gap: $x1;
   }
   &--bottom{
-    position: fixed;
+    position: absolute;
     background-color: #fff;
     bottom: 0;
     left: 0;

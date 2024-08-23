@@ -1,110 +1,80 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { useStore } from 'vuex';
+import { useRoute } from 'vue-router';
+
 import ListItem from '@/components/contents/ListItem';
 import ModalItem from '@/components/contents/ModalItem';
 import AccoItem from '@/components/contents/AccoItem';
 
-import JsonData from '@/assets/data/checkup.json';
+import JsonBasic from '@/assets/data/basic.json';
+import JsonBasicImg from '@/assets/data/basic_img.json';
+import JsonStandard from '@/assets/data/standard.json';
+import JsonPremium from '@/assets/data/premium.json';
+ 
 
-//header title
+const route = useRoute();
 const store = useStore();
-store.state.PageInfo.title = '추천 플랜 상세';
-store.commit("titleChange", store.state.PageInfo.title);
-const planNum = ref(store.state.PageInfo.tab);
 
 //기본 제목부분
-let planLevel = 'basic'; //'basic', 'standard', 'premium'
-const age = '43'; 
-const gender = '남성'; 
-let planName = '베이직 플랜';
+store.state.PageInfo.title = '추천 플랜 상세';
+store.commit("titleChange", store.state.PageInfo.title);
 
-switch (Number(planNum.value)) {
-  case 0 : 
-    planLevel = 'basic';
+
+const age = store.state.PageInfo.my.age || '--'; 
+const gender = store.state.PageInfo.my.gender || '--'; 
+const planLevel = route.params.planID; //'basic', 'standard', 'premium'
+let planName = '--- --';
+let jsonPlanList = JsonBasic;
+let jsonPlanListImg = JsonBasicImg;
+switch (planLevel) {
+  case 'basic' : 
     planName = '베이직 플랜';
+    jsonPlanList = JsonBasic;
     break;
 
-  case 1 : 
-    planLevel = 'standard';
+  case 'standard' : 
     planName = '스탠다드 플랜';
+    jsonPlanList = JsonStandard;
     break;
 
-  case 2 : 
-    planLevel = 'premium';
+  case 'premium' : 
     planName = '프리미엄 플랜';
+    jsonPlanList = JsonPremium;
     break;
 
   default:
-    planLevel = 'standard';
     planName = '스탠다드 플랜';
+    jsonPlanList = JsonStandard;
     break;
 }
 
-
-console.log('tab', store.state.PageInfo.tab);
-
 //아코디언 리스트
-const planList = [
-  {
-    icon:'a-1',
-    title: '지질대사 및 심혈관계 검사',
-    style: 'checkup',
-    event: true,
-    list: [
-			{ id: 'a_1', name: '총콜레스테롤' },
-			{ id: 'a_2', name: '고밀도콜레스테롤(HDL)' },
-			{ id: 'a_3', name: '저밀도콜레스테롤(LDL)' },
-			{ id: 'a_4', name: '중성지방' }
-		]
-  },
-  {
-    icon:'a-2',
-    title: '성, 연령별 추가 검사',
-    style: 'checkup',
-    event: true,
-    list: [
-			{ id: 'b_1', name: 'B형간염' },
-			{ id: 'b_2', name: '치면세균막' },
-			{ id: 'b_3', name: '골다공증' },
-			{ id: 'b_4', name: '우울증' },
-			{ id: 'b_5', name: '생활습관' },
-			{ id: 'b_6', name: '노인신체기능' },
-			{ id: 'b_7', name: '인지기능장애' },
-		]
-  },
-  {
-    icon:'a-3',
-    title: '국가암검진 관련 검사',
-    style: 'checkup',
-    event: true, 
-    list: [
-			{ id: 'b_1', name: '333B형간염' },
-			{ id: 'b_2', name: '치면세균막' },
-			{ id: 'b_3', name: '골다공증' },
-			{ id: 'b_4', name: '우울증' },
-			{ id: 'b_5', name: '생활습관' },
-			{ id: 'b_6', name: '노인신체기능' },
-			{ id: 'b_7', name: '인지기능장애' },
-		]
-  },
-  {
-    icon:'a-4',
-    title: '기본검사',
-    style: 'checkup',
-    event: true,
-    list: [
-			{ id: 'b_1', name: '444B형간염' },
-			{ id: 'b_2', name: '치면세균막' },
-			{ id: 'b_3', name: '골다공증' },
-			{ id: 'b_4', name: '우울증' },
-		]
+let planList = [];
+let n = 0;
+for (let i = 0, len = jsonPlanList.length; i < len; i++) {
+  const item = jsonPlanList[i];
+  if (item.ctg !== "") {
+    planList.push({
+      icon:"icon-" + item.id,
+      title: item.ctg,
+      style: 'checkup',
+      event: true,
+      list: []
+    });
+    n = n + 1;
   }
-];
+  planList[n - 1].list.push({
+    id: 'a_' + item.id, 
+    name: item.name,
+    event: (item.info1 || item.info2 || item.info3 || item.info4) ? true : false,
+  })
+}
 
 //검사항목 상세팝업
 const checkupID = ref(null);
 const info_data = ref(null);
+const img_data = ref(null);
 const data_NEW_FE_ST_03_01 = {
   modal: {
     id: 'NEW_FE_ST_03_01',
@@ -124,71 +94,85 @@ const callAct = (v) => {
 }
 
 const actContent = (v) => {
-  info_data.value = JsonData[v];
+  let idNum = v.split('a_')
+
+  for (let i = 0, len = jsonPlanList.length; i < len; i++) {
+    const item = jsonPlanList[i];
+    if (item.id === idNum[1]) {
+      info_data.value = item;
+      img_data.value = jsonPlanListImg[i];
+      break;
+    }
+  }
 
   const _thisModal = document.querySelector(`[data-id="${data_NEW_FE_ST_03_01.modal.id}"]`);
   const _modalBody = _thisModal.querySelector('.layer-item--body');
+  const item = info_data.value;
+ 
   let html_cont = ``;
-
-  for (let i = 0, len = info_data.value.conts.length; i < len; i++) {
-    const item = info_data.value.conts[i];
    
-    html_cont += `<section class="wrap-sec">`;
-    
-      if (item.title) {
-      html_cont += `<h3>${item.title}</h3>`;
-    }
-
-    if (item.cont) {
-      if (typeof item.cont === 'string') {
-        html_cont += `<div>${item.cont}</div>`;
+  html_cont += `<article class="wrap-sec">`;
+  const actInfo = (t,v) => {
+    const info = item[v];
+    if (info !== "") {
+      html_cont += `<section class="checkup-info--cont">
+        <h3>${t}</h3>`;
+      if (typeof info === 'string') {
+        html_cont += `<div>${info}</div>`;
       }
       else {
         html_cont += `<ul data-bullet="dot">`;
-        for (const li of item.cont) {
+        for (const li of info) {
           html_cont += `<li>${li}</li>`;
         }
         html_cont += `</ul>`;
       }
+      html_cont += `</section>`;
     }
-    if (item.img) {
-      html_cont += `<div class="checkup-info--img">
-        <div class="checkup-info--img-wrap">`;
-        for (const li of item.img) {
-          html_cont += `<figure class="checkup-info--img-item"><img src="${li.src}" alt="${li.alt}"></figure>`;
-        }
-        html_cont += `</div>
-        </div>`;
-    }
-    html_cont += `</section>`;
   }
+  const actImg = () => {
+  if (img_data.value.img !== "") {
+      html_cont += 
+      `<div class="checkup-info--img">
+        <div class="checkup-info--img-wrap">
+          <figure class="checkup-info--img-item"><img src="/images/sample/${img_data.value.img}.png" alt=""></figure>
+        </div>
+      </div>`;
+    }
+  }
+  actInfo('개요','info1');
+  actInfo('방법','info2');
+  actImg();
+  actInfo('목적','info3');
+  actInfo('유의사항','info4');
+  actInfo('준비사항','info5');
+ 
+  
+  html_cont += `</article>`;
   _modalBody.innerHTML = html_cont;
 
   if (_thisModal) {
     const _thisModal_tit = _thisModal.querySelector('.layer-item--title');
 
-    if (_thisModal_tit && info_data.value.title) {
-      _thisModal_tit.textContent = info_data.value.title;
+    if (_thisModal_tit && info_data.value.name) {
+      _thisModal_tit.textContent = info_data.value.name;
     }
   }
 }
 
 watch(() => checkupID.value, (newValue) => {
-    // 속성 값이 변경될 때 실행되는 로직
-    // console.log('watch', newValue, oldValue);
-    // actContent();
     checkupID.value = newValue;
-    console.log('watch',checkupID.value);
 });
+
 </script>
 
 <template>
 	<main class="base-main" >
 		<div class="base-content">
       <div class="wrap-box" data-style="plan" :data-plan="planLevel">
-        <div class="subject-group">
+        <div class="subject-group" role="text">
           <h2 class="subject-group--heading">
-            <em data-marker="yellow">{{ age }}세 {{ gender }}</em>을 위한 <br>
+            <em>{{ age }}세 {{ gender }}을 위한</em> <br>
             {{ planName }}
           </h2>
           <em class="subject-group--addition">
@@ -212,10 +196,10 @@ watch(() => checkupID.value, (newValue) => {
 		</div>
 
     <div class="wrap--btn">
-      <button type="button" class="btn--box" data-style="gray" @click="alertShow">
+      <button type="button" class="btn--box" data-style="primary" @click="alertShow">
         <span>플랜 목록 보기</span>
       </button>
-      <button type="button" class="btn--box" data-style="gray" @click="alertShow">
+      <button type="button" class="btn--box" data-style="primary" @click="alertShow">
         <span>조회 다시 하기</span>
       </button>
     </div>
@@ -265,10 +249,16 @@ watch(() => checkupID.value, (newValue) => {
     background: url(@/assets/images/icon/plan_premium.png) no-repeat 50% 50% / 8rem;
   }
   .subject-group--heading {
-    color:#101010;
-    font-size: 2.2rem;
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: #0B1A23;
     margin-bottom: 1.8rem;
-    line-height:3.3rem;
+    line-height:3.9rem;
+    em{
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #505866;
+    }
   }
   .subject-group--addition {
     background:#ECEEF2;

@@ -5,16 +5,16 @@ const dataList = {
     style: 'checkup-major',
     event: 'none', //'none', 'link', 'link-modal'
     list: [
-        { icon: '3-1', name: '경동맥초음파' },
-        { icon: '3-2', name: '특수혈액검사' },
-        { icon: '3-3', name: 'CT검사' }
+        { icon: '3-1', name: '경동맥초음파', event: false, },
+        { icon: '3-2', name: '특수혈액검사', event: false, },
+        { icon: '3-3', name: 'CT검사', event: false, }
     ]
 }
 </script>
 
 <template>
     <section class="wrap-box">
-        <RouterLink :to="{name: 'NEW_FE_ST_03'}" role="text">
+        <RouterLink :to="{name: 'NEW_FE_ST_03', params:{ planID: 'premium'}}" role="text">
             <div class="subject-group">
                 <h2 class="subject-group--heading">
                     프리미엄 플랜

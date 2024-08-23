@@ -59,11 +59,16 @@
 
       button {
         width: 100%;
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: #1d1d1d;
         text-align: left;
+        text-decoration: underline;
+        text-underline-offset: .5rem;
       }
     }
     .list--title {
-      font-weight: 600;
+      font-weight: 400;
       font-size: 1.6rem;
       line-height: 2.4rem;
       letter-spacing: -2%;
@@ -71,8 +76,6 @@
     }
   }
 }
-
-
 
 //약관리스트
 .term-list{

@@ -5,13 +5,12 @@ import ModalItem from '@/components/contents/ModalItem';
 const props = defineProps({
   button: Object
 });
-console.log('button data', props.button)
 
-const data = {
+const data_terms = {
   modal: {
-    id: 'test2',
+    id: 'terms_person',
     type: 'full-page',
-    class: ''
+    class: '',
   },
   button: {
     name: props.button.name || false,
@@ -22,7 +21,7 @@ const data = {
 </script>
 
 <template>
-  <ModalItem :data="data">
+  <ModalItem :data="data_terms">
     <template #head>
       <h2 class="layer-item--title">KB헬스케어 서비스 이용 안내</h2>
     </template>

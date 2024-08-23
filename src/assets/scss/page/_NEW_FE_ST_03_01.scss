@@ -1,6 +1,9 @@
 .checkup-info {
 
 	.wrap-sec {
+		display: flex;
+		flex-direction: column;
+		gap: 2.4rem;
 		position: relative;
 		padding:0 2.4rem;
 
@@ -19,16 +22,12 @@
 			color:#101010;
 		}
 
-		& + .wrap-sec {
-			margin-top: 2.4rem;
-		}
 	}
 
 	&--img {
 		position: relative;
-		width: 100vw;
+		width: calc(100% + 4.8rem);
 		overflow-x: auto;
-		margin-top: 2.4rem;
 		margin-left: -2.4rem;
 		padding-left: 2.4rem;
 

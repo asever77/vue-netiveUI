@@ -9,7 +9,7 @@ const props = defineProps({
 
 const _data = ref(props.data);
 const itemList = _data.value.list;
-const itemEvent = _data.value.event;
+// const itemEvent = _data.value.event;
 
 const act = e => {
     const _this = e.target
@@ -26,8 +26,8 @@ const act = e => {
     <div class="list" :data-style="_data.style ? _data.style : null">
         <ul class="list--wrap">
             <li class="list--item" v-for="(_item, index) in itemList" :key="index" :data-icon="_item.icon ? _item.icon : null">
-                <template v-if="itemEvent">
-                    <button type="button" @click="act" :data-id="_item.id">
+                <template v-if="_item.event">
+                    <button type="button" @click="act" :data-id="_item.id" >
                         {{ _item.name }}
                     </button>
                 </template>

@@ -5,16 +5,28 @@ const dataList = {
     style: 'checkup-major',
     event: 'none', //'none', 'link', 'link-modal'
     list: [
-        { icon: '1-1', name: '체질량지수(BMI)' },
-        { icon: '1-2', name: '공복혈당' },
-        { icon: '1-3', name: '총콜레스테롤' }
+        { 
+            icon: '1-1', 
+            name: '체질량지수(BMI)',
+            event: false,
+        },
+        { 
+            icon: '1-2', 
+            name: '공복혈당',
+            event: false,
+        },
+        { 
+            icon: '1-3', 
+            name: '총콜레스테롤', 
+            event: false,
+        }
     ]
 }
 </script>
 
 <template>
     <section class="wrap-box" >
-        <RouterLink :to="{name: 'NEW_FE_ST_03'}" role="text">
+        <RouterLink :to="{name: 'NEW_FE_ST_03', params:{ planID: 'basic'} }" role="text">
             <div class="subject-group">
                 <h2 class="subject-group--heading">
                     베이직 플랜
@@ -31,4 +43,3 @@ const dataList = {
         </RouterLink>
     </section>
 </template>
-

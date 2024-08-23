@@ -16,8 +16,8 @@
 }
 .toast {
     position: relative;
-    width: calc(100vw - $x4);
-    max-width: 40rem;
+    width: calc(100% - $x4);
+    max-width: calc(var(--max_width) - 4.8rem);
     border-radius: $x1;
     display: flex;
     justify-content: center;
