@@ -3,15 +3,15 @@ import { ref, watch } from 'vue';
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 
+import StartModal from '@/views/modal/NEW_FE_HO_00_01.vue';
+
 import ListItem from '@/components/contents/ListItem';
 import ModalItem from '@/components/contents/ModalItem';
 import AccoItem from '@/components/contents/AccoItem';
 
 import JsonBasic from '@/assets/data/basic.json';
-import JsonBasicImg from '@/assets/data/basic_img.json';
 import JsonStandard from '@/assets/data/standard.json';
 import JsonPremium from '@/assets/data/premium.json';
- 
 
 const route = useRoute();
 const store = useStore();
@@ -20,13 +20,12 @@ const store = useStore();
 store.state.PageInfo.title = '추천 플랜 상세';
 store.commit("titleChange", store.state.PageInfo.title);
 
-
 const age = store.state.PageInfo.my.age || '--'; 
 const gender = store.state.PageInfo.my.gender || '--'; 
 const planLevel = route.params.planID; //'basic', 'standard', 'premium'
 let planName = '--- --';
 let jsonPlanList = JsonBasic;
-let jsonPlanListImg = JsonBasicImg;
+
 switch (planLevel) {
   case 'basic' : 
     planName = '베이직 플랜';
@@ -49,32 +48,81 @@ switch (planLevel) {
     break;
 }
 
-//아코디언 리스트
 let planList = [];
-let n = 0;
-for (let i = 0, len = jsonPlanList.length; i < len; i++) {
-  const item = jsonPlanList[i];
-  if (item.ctg !== "") {
-    planList.push({
-      icon:"icon-" + item.id,
-      title: item.ctg,
-      style: 'checkup',
-      event: true,
-      list: []
-    });
-    n = n + 1;
+// let n = 0;
+
+// for (let i = 0, len = jsonPlanList.length; i < len; i++) {
+//   const item = jsonPlanList[i];
+//   if (item.ctg !== "") {
+//     planList.push({
+//       icon:"icon-" + item.id,
+//       title: item.ctg,
+//       style: 'checkup',
+//       event: true,
+//       list: []
+//     });
+//     n = n + 1;
+//   }
+//   planList[n - 1].list.push({
+//     id: 'a_' + item.id, 
+//     name: item.name,
+//     event: (item.info1 || item.info2 || item.info3 || item.info4) ? true : false,
+//   })
+// }
+
+
+//아코디언 리스트
+const resultData = [
+  {
+    "categoryID" : "100001",
+    "categoryName": "기초검사",
+    "categoryList" : [
+      {
+        "itemID" : "1",
+        "itemName" : "진찰(문진)",
+        "recommaendation" : "국가 검진 기본 항목",
+        "price" : 0.0,
+        "sort" : 1
+      },
+      {
+        "itemID" : "2",
+        "itemName" : "신장(키)",
+        "recommaendation" : "국가 검진 기본 항목",
+        "price" : 0.0,
+        "sort" : 2
+      }
+    ]
+  },
+  {
+    "categoryID" : "100002",
+    "categoryName": "방사선 촬영 및 초음파 검사",
+    "categoryList" : [
+      {
+        "itemID" : "15",
+        "itemName" : "흉부방사선촬영(흉부 X-ray)",
+        "recommaendation" : "국가 검진 기본 항목",
+        "price" : 0.0,
+        "sort" : 1
+      }
+    ]
   }
-  planList[n - 1].list.push({
-    id: 'a_' + item.id, 
-    name: item.name,
-    event: (item.info1 || item.info2 || item.info3 || item.info4) ? true : false,
-  })
+];
+console.log(resultData);
+for (let i = 0, len = resultData.length; i < len; i++) {
+  const item = resultData[i];
+
+  planList.push({
+    icon:"icon-" + item.categoryID,
+    title: item.categoryName,
+    style: 'checkup',
+    event: true,
+    list: item.categoryList
+  });
 }
 
 //검사항목 상세팝업
 const checkupID = ref(null);
 const info_data = ref(null);
-const img_data = ref(null);
 const data_NEW_FE_ST_03_01 = {
   modal: {
     id: 'NEW_FE_ST_03_01',
@@ -86,11 +134,11 @@ const data_NEW_FE_ST_03_01 = {
     }
   },
 }
-const $childRef = ref();
+const childRef = ref();
 const callAct = (v) => {
 	checkupID.value = v.call;
 	actContent(checkupID.value);
-	$childRef.value.open();
+	childRef.value.open();
 }
 
 const actContent = (v) => {
@@ -100,7 +148,6 @@ const actContent = (v) => {
     const item = jsonPlanList[i];
     if (item.id === idNum[1]) {
       info_data.value = item;
-      img_data.value = jsonPlanListImg[i];
       break;
     }
   }
@@ -113,7 +160,9 @@ const actContent = (v) => {
    
   html_cont += `<article class="wrap-sec">`;
   const actInfo = (t,v) => {
-    const info = item[v];
+    let info = item[v];
+    info = info.replace(/(?:\r\n|\r|\n)/g, "<br>");
+
     if (info !== "") {
       html_cont += `<section class="checkup-info--cont">
         <h3>${t}</h3>`;
@@ -131,11 +180,11 @@ const actContent = (v) => {
     }
   }
   const actImg = () => {
-  if (img_data.value.img !== "") {
+  if (item.img !== "") {
       html_cont += 
       `<div class="checkup-info--img">
         <div class="checkup-info--img-wrap">
-          <figure class="checkup-info--img-item"><img src="/images/sample/${img_data.value.img}.png" alt=""></figure>
+          <figure class="checkup-info--img-item"><img src="/images/sample/${item.img}.png" alt=""></figure>
         </div>
       </div>`;
     }
@@ -146,7 +195,6 @@ const actContent = (v) => {
   actInfo('목적','info3');
   actInfo('유의사항','info4');
   actInfo('준비사항','info5');
- 
   
   html_cont += `</article>`;
   _modalBody.innerHTML = html_cont;
@@ -181,7 +229,7 @@ watch(() => checkupID.value, (newValue) => {
         </div>
       </div>
 
-			<div class="checkup-detail-list mt-x4">
+			<div class="checkup-detail-list mt-x4" :data-level="planLevel">
         <AccoItem v-for="(_item, index) in planList" 
           :key="index" 
           :data="planList[index]" 
@@ -196,16 +244,19 @@ watch(() => checkupID.value, (newValue) => {
 		</div>
 
     <div class="wrap--btn">
-      <button type="button" class="btn--box" data-style="primary" @click="alertShow">
+      <RouterLink :to="{name: 'NEW_FE_ST_02'}"  class="btn--box" data-style="primary">
         <span>플랜 목록 보기</span>
-      </button>
-      <button type="button" class="btn--box" data-style="primary" @click="alertShow">
-        <span>조회 다시 하기</span>
-      </button>
+      </RouterLink>
+      
+      <StartModal :button="{
+        name: '조회 다시 하기',
+        class: 'btn--box'
+      }" />
+     
     </div>
 
     <!-- NEW_FE_ST_03_01 -->
-		<ModalItem :data="data_NEW_FE_ST_03_01" @call-act="callAct" ref="$childRef">
+		<ModalItem :data="data_NEW_FE_ST_03_01" @call-act="callAct" ref="childRef">
 			<template #head>
 				<h2 class="layer-item--title" :id="data_NEW_FE_ST_03_01.modal.aria.labelledby" tabindex="0"></h2>
 			</template>

@@ -22,9 +22,9 @@ watch(() => route.meta.depth, (newValue, oldValue) => {
     <div class="subject-group" data-style="desktop" role="text">
       <img class="ci" src="@/assets/images/CI.svg" alt="KB헬스케어">
       <h2 class="subject-group--heading">
-        나에게 필요한 건강검진 <br>
-        쉽게 알려주는
-        <b>KB 간편검진서비스 </b>
+        나와 가족의 건강관리 <br>
+        쉽고 간편하게 <br>
+        <b>지금, KB건강검진</b>
       </h2>
     </div>
 

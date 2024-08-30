@@ -5,13 +5,13 @@
     background-size: 15rem;
   }
   [data-icon="1-1"]::before {background-position: 0 0;}
-  [data-icon="1-2"]::before {background-position: -5rem 0;}
-  [data-icon="1-3"]::before {background-position: -10rem 0;}
-  [data-icon="2-1"]::before {background-position: 0 -5rem;}
+  [data-icon="1-2"]::before {background-position: 0 -5rem;}
+  [data-icon="1-3"]::before {background-position: 0 -10rem;}
+  [data-icon="2-1"]::before {background-position: -5rem 0;}
   [data-icon="2-2"]::before {background-position: -5rem -5rem;}
-  [data-icon="2-3"]::before {background-position: -10rem -5rem;}
-  [data-icon="3-1"]::before {background-position: 0 -10rem;}
-  [data-icon="3-2"]::before {background-position: -5rem -10rem;}
+  [data-icon="2-3"]::before {background-position: -5rem -10rem;}
+  [data-icon="3-1"]::before {background-position: -10rem 0;}
+  [data-icon="3-2"]::before {background-position: -10rem -5rem;}
   [data-icon="3-3"]::before {background-position: -10rem -10rem;}
 }
 
@@ -21,12 +21,31 @@
     display: block;
     width: 3.2rem;
     height: 3.2rem;
-    background-image: url(@/assets/images/icon/sp_icon32.png);
+    background-image: url(@/assets/images/icon/sp_icon32@2x.png);
     background-repeat: no-repeat;
-    background-size: 8rem;
+    background-size: 20rem;
   }
-  [data-icon="a-1"]::before {background-position: 0 0;}
-  [data-icon="a-2"]::before {background-position: -4rem 0;}
-  [data-icon="a-3"]::before {background-position: 0 -4rem;}
-  [data-icon="a-4"]::before {background-position: -4rem -4rem;}
+  &[data-level="basic"] [data-icon="icon-100001"]::before {background-position: 0 0;} //기본검사
+  &[data-level="standard"] [data-icon="icon-100001"]::before,
+  &[data-level="premium"] [data-icon="icon-100001"]::before {background-position: -4rem 0;} //기초검사
+
+  &[data-level="basic"] [data-icon="icon-101"]::before, 
+  &[data-level="standard"] [data-icon="icon-45"]::before,
+  &[data-level="premium"] [data-icon="icon-45"]::before {background-position: 0 -4rem;} //지질대사 및 심혈관계 검사
+  &[data-level="basic"] [data-icon="icon-105"]::before {background-position: 0 -12rem;} //성,연령별 추가 검사
+  &[data-level="basic"] [data-icon="icon-112"]::before {background-position: -4rem -12rem;} //국가암검진 관련 검사
+
+  [data-icon="icon-100002"]::before {background-position: -8rem 0;} //방사선 촬영 및 초음파 검사
+  [data-icon="icon-21"]::before {background-position: -12rem 0;} //요관련 검사
+  [data-icon="icon-38"]::before {background-position: -16rem 0;} //혈당,췌장,신장기능 관련 검사
+
+  [data-icon="icon-55"]::before {background-position: -4rem -4rem;} //간염바이러스 및 간기능 관련 검사
+  [data-icon="icon-66"]::before {background-position: -8rem -4rem;} //퉁풍,류마티즘,갑상선 검사
+  [data-icon="icon-70"]::before {background-position: -12rem -4rem;} //혈액질환 관련 검사
+  [data-icon="icon-93"]::before {background-position: -16rem -4rem;} //부인과 검사
+  [data-icon="icon-101"]::before {background-position: 0 -8rem;} //추가검사1
+  [data-icon="icon-201"]::before {background-position: -4rem -8rem;} //추가검사2
+  [data-icon="icon-301"]::before {background-position: -8rem -8rem;} //추가검사3
+  [data-icon="icon-401"]::before {background-position: -12rem -8rem;} //추가검사4
+
 }

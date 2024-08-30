@@ -31,7 +31,7 @@ import TermsModal from '@/views/modal/TermsModal.vue';//약관
           </span>
         
           <span>
-            06212 서울특별시 강남구 테혜란로 334, 15층 <br>
+            06212 서울특별시 강남구 테혜란로 334, 5층 <br>
             (교정공제회 역삼빌딩) <br>
             대표전화 : 1544-3677 <br>
           </span>

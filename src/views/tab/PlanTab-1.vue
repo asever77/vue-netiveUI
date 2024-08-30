@@ -7,17 +7,17 @@ const dataList = {
     list: [
         { 
             icon: '1-1', 
-            name: '체질량지수(BMI)',
+            itemName: '체질량지수(BMI)',
             event: false,
         },
         { 
             icon: '1-2', 
-            name: '공복혈당',
+            itemName: '공복혈당',
             event: false,
         },
         { 
             icon: '1-3', 
-            name: '총콜레스테롤', 
+            itemName: '총콜레스테롤', 
             event: false,
         }
     ]

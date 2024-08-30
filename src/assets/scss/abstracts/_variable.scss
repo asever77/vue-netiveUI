@@ -31,6 +31,10 @@
     --gray_0:   #fff;
 
     --max_width: 50rem;
+
+    @media (hover: hover) and (pointer: fine) and (min-width:1090px) {
+        --max_width:46.4rem;
+    }
 }
 
 //기본간격

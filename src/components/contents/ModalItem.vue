@@ -2,7 +2,6 @@
 import { useStore } from 'vuex';
 import { defineProps, ref, defineEmits, defineExpose } from 'vue';
 
-
 const store = useStore();
 const props = defineProps({
   data: Object,
@@ -46,11 +45,12 @@ const open = () => {
   isHidden.value = false;
 
   //페이지 좌우 이동 효과
-  if (dataModal.value.type === 'full-page') {
+  if (dataModal.value.type === 'full-slide') {
     _body.dataset.pageSwiper = "on";
   }
   _body.dataset.layer = true;
   const layerItem = document.querySelector(`.layer-item[data-id="${dataModal.value.id}"]`);
+  const layerBody= layerItem.querySelector('.layer-item--body');
   const layerWrap = layerItem.querySelector('.layer-item--wrap');
   const closeBtn = layerItem.querySelector('.layer-item--close');
   const closeBtHide = layerItem.querySelector('.layer-item--close-hide');
@@ -84,6 +84,9 @@ const open = () => {
   }
   closeBtn.addEventListener('keydown', a11y_keyStart);
   closeBtHide.addEventListener('keydown', a11y_keyEnd);
+  layerBody.scrollTo({
+    top: 0,
+  });
 
   //css animation 끝나는 시점
   const actMotionEnd = () => {
@@ -106,7 +109,7 @@ const close = () => {
   layerItem.setAttribute('aria-hidden', 'true');
   layerItem.removeAttribute('style');
   //페이지 좌우 이동 효과
-  if (dataModal.value.type === 'full-page') {
+  if (dataModal.value.type === 'full-slide') {
     _body.dataset.pageSwiper = "off";
   }
 

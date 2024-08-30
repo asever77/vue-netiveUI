@@ -14,7 +14,7 @@
     </div>
     <div class="wrap--bottom">
       <div class="wrap--btn">
-        <RouterLink :to="{name: 'NEW_FE_ST_03'}" class="btn--box" data-color="gray" >
+        <RouterLink :to="{name: 'NEW_FE_HO_00'}" class="btn--box" data-color="gray" >
           <span>홈으로 이동</span>
         </RouterLink>
       </div>

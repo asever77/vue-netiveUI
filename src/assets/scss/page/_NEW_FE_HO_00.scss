@@ -9,17 +9,17 @@
 		width: calc(100% + 2px);
 		height:100%;
 		transition: all 500ms cubic-bezier(0,0,0.5,1);
-		opacity: .8;
+		opacity: 1;
 	}
 	
 	&[data-hero="0"]::before {
-		background: url(@/assets/images/main/hero-1.jpg) no-repeat 50% 50% / cover;
+		background: url(@/assets/images/main/hero-1.jpg) no-repeat 50% 0 / cover;
 	}
 	&[data-hero="1"]::before {
-		background: url(@/assets/images/main/hero-2.jpg) no-repeat 50%  50% / cover;
+		background: url(@/assets/images/main/hero-2.jpg) no-repeat 50% 0 / cover;
 	}
 	&[data-hero="2"]::before {
-		background: url(@/assets/images/main/hero-3.jpg) no-repeat 50% 50% / cover;
+		background: url(@/assets/images/main/hero-3.jpg) no-repeat 50% 0 / cover;
 	}
 
 	&-start {
@@ -32,7 +32,15 @@
 		padding: 0 2.4rem 6.8rem;
 		z-index: 2;
 	}
- 
+	.swiper-slide.n1{
+		background: url(@/assets/images/main/hero-1.jpg) no-repeat 50% 0 / cover;
+	}
+	.swiper-slide.n2{
+		background: url(@/assets/images/main/hero-2.jpg) no-repeat 50% 0 / cover;
+	}
+	.swiper-slide.n3{
+		background: url(@/assets/images/main/hero-3.jpg) no-repeat 50% 0 / cover;
+	}
 	.swiper-slide {
 		padding: 0 2.4rem 22rem;
 		width: 100%;

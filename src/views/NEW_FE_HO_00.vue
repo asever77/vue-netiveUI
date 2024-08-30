@@ -93,7 +93,7 @@
 			<!-- hero swiper slogan -->
       <div class="hero" :data-hero="swiperPage">
         <swiper v-bind="swiperOptions" @swiper="onSwiper" @slideChange="onSlideChange">
-          <swiper-slide>
+          <swiper-slide class="n1">
             <div class="subject-group" role="text">
               <img class="ci" src="@/assets/images/CI.svg" alt="KB헬스케어">
               <h2 class="subject-group--heading">
@@ -105,7 +105,7 @@
               </em>
             </div>
           </swiper-slide>
-          <swiper-slide>
+          <swiper-slide class="n2">
             <div class="subject-group" role="text">
               <img class="ci" src="@/assets/images/CI.svg" alt="KB헬스케어">
               <h2 class="subject-group--heading">
@@ -117,7 +117,7 @@
               </em>
             </div>
           </swiper-slide>
-          <swiper-slide>
+          <swiper-slide class="n3">
             <div class="subject-group" role="text">
               <img class="ci" src="@/assets/images/CI.svg" alt="KB헬스케어">
               <h2 class="subject-group--heading">

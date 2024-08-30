@@ -94,7 +94,7 @@ const router = createRouter({
   scrollBehavior() {
     const _body = document.querySelector('body');
     _body.dataset.layer = false;
-
+    _body.dataset.pageSwiper = 'off';
     return { top: 0 };
   }
 });

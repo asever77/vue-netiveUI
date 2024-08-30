@@ -2,7 +2,13 @@
 
 export default {
 	install(Vue) {
-		const UI = {
+		
+		const global = 'UI';
+		if (!window[global]) {
+			window[global] = {};
+		}
+		
+		window[global] = {
 			toastModal: {
 				/**
 				 * options 
@@ -137,9 +143,9 @@ export default {
 				hide(el_alert) {
 					const clear = e => {
 						const _this = e.currentTarget;
-						
+						const _alert = _this.closest('.alert')
 						_this.removeEventListener('animationend', clear);
-						_this.remove();
+						_alert.remove();
 					}
 					el_alert.setAttribute('aria-hidden','true');
 					el_alert.addEventListener('animationend', clear);
@@ -156,7 +162,7 @@ export default {
 					//aria-hidden 값 > css animation
 	
 					//페이지 좌우 이동 효과
-					if (_type === 'full-page') {
+					if (_type === 'full-slide') {
 						_body.dataset.pageSwiper = "on";
 					}
 					_body.dataset.layer = true;
@@ -219,7 +225,7 @@ export default {
 					layerItem.setAttribute('aria-hidden', 'true');
 					layerItem.removeAttribute('style');
 					//페이지 좌우 이동 효과
-					if (layerItem.dataset.type === 'full-page') {
+					if (layerItem.dataset.type === 'full-slide') {
 						_body.dataset.pageSwiper = "off";
 					}
 
@@ -231,9 +237,10 @@ export default {
 					}
 				}
 			},
-			
 		}
 
-		Vue.provide('UI', UI);
+		const Global = window[global];
+		console.log(Global)
+		Vue.provide('UI', Global);
 	}
 }

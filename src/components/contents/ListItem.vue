@@ -26,13 +26,13 @@ const act = e => {
     <div class="list" :data-style="_data.style ? _data.style : null">
         <ul class="list--wrap">
             <li class="list--item" v-for="(_item, index) in itemList" :key="index" :data-icon="_item.icon ? _item.icon : null">
-                <template v-if="_item.event">
-                    <button type="button" @click="act" :data-id="_item.id" >
-                        {{ _item.name }}
+                <template v-if="_item.event || _item.event === undefined">
+                    <button type="button" @click="act" :data-id="'a_' + _item.itemID" >
+                        {{ _item.itemName }}
                     </button>
                 </template>
                 <template v-else>
-                    <div class="list--title">{{ _item.name }}</div>
+                    <div class="list--title">{{ _item.itemName }}</div>
                 </template>
             </li>
         </ul>

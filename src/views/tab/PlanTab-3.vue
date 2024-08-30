@@ -5,9 +5,9 @@ const dataList = {
     style: 'checkup-major',
     event: 'none', //'none', 'link', 'link-modal'
     list: [
-        { icon: '3-1', name: '경동맥초음파', event: false, },
-        { icon: '3-2', name: '특수혈액검사', event: false, },
-        { icon: '3-3', name: 'CT검사', event: false, }
+        { icon: '3-1', itemName: '경동맥초음파', event: false, },
+        { icon: '3-2', itemName: '특수혈액검사', event: false, },
+        { icon: '3-3', itemName: 'CT검사', event: false, }
     ]
 }
 </script>
